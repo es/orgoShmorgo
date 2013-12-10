@@ -7,7 +7,7 @@
 	var radius = d3.scale.sqrt()
 	    .range([0, 6]);
 
-	var svg = d3.select("#container").append("svg")
+	var svg = d3.select("#moleculeDisplay").append("svg")
 	    .attr("width", width)
 	    .attr("height", height);
 
