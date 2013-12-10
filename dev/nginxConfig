@@ -1,0 +1,8 @@
+
+# the nginx server instance
+server {
+    listen 80;
+    #server_name localhost;
+    #server_name yourdomain.com yourdomain;
+    root /vagrant;
+ }
