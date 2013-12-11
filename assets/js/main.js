@@ -15,6 +15,10 @@
 	 	console.log ("this:", this);
 	 	console.log("this.firstElementChild:", this.firstElementChild);
 	 	console.log("this.firstElementChild+d3:", d3.select(this.firstElementChild));
+	 	
+	 	if (dataPoint.atom === "H")
+	 		return;
+
 	 	if (atom)
 	 		atom.remove();
 
@@ -25,7 +29,7 @@
 	 						    .style("filter", "url(#selectedGlow)");
 	};
 
-	/*var bond;
+	var bond;
 	var bondClicked = function (dataPoint) {
 	 	console.log ("bond:", dataPoint);
 	 	console.log ("this:", this);
@@ -41,9 +45,10 @@
 	 						    	console.log(d);
 	 						    	return (d.bond * 2 - 1) * 2 + "px"; })
 	 						    .style("filter", "url(#selectedGlow)");
-	};*/
+	};
 
-	var selectedGlow = glow("selectedGlow").rgb("#1F75C4").stdDeviation(4);
+	/*var selectedGlow = glow("selectedGlow").rgb("#1F75C4").stdDeviation(7);*/
+	var selectedGlow = glow("selectedGlow").rgb("#0000A0").stdDeviation(7);
 
 	var svg = d3.select("#moleculeDisplay").append("svg")
 	    .attr("width", width)
@@ -66,13 +71,16 @@
 	      .data(graph.links)
 	    	.enter().append("g")
 	      .attr("class", "link");
-	      /*.on("click", bondClicked);*/
 
 	  link.append("line")
 	      .style("stroke-width", function(d) { return (d.bond * 2 - 1) * 2 + "px"; });
 
 	  link.filter(function(d) { return d.bond > 1; }).append("line")
+	  		.on("click", bondClicked)
 	      .attr("class", "separator");
+
+	  svg.selectAll(".link")
+	      .on("click", bondClicked);
 
 	  var node = svg.selectAll(".node")
 	      .data(graph.nodes)

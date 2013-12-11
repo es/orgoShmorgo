@@ -5,11 +5,14 @@
 		<style type="text/css">
 		 body {
 		 	padding-top: 50px; 
+		 	background-color: #FAF7F7 !important;
 		 }
 		</style>
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="assets/libs/bootstrap/css/bootstrap-3.0.3.min.css">
+		<link rel="stylesheet" type="text/css" href="assets/libs/bootswatch/flatly/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+		
 	</head>
 	<body>
 
@@ -17,13 +20,55 @@
 		<div class="container">
 			<div id="controlPanel" class="row">
 				<div class="row">
-					<div class="col-md-8">.col-md-1</div>
-					<div class="col-md-4">.col-md-1</div>
+					<div class="col-md-7">
+						 <div class="input-group">
+					      <input type="text" disabled style="background-color: #fff; cursor: auto;" placeholder="Carbon Name" class="form-control">
+					      <span class="input-group-btn">
+					        <button class="btn btn-default" type="button">Name The Molecule</button>
+					      </span>
+					    </div><!-- /input-group -->
+						<!-- <input disabled type="text" class="form-control" style="background-color: #fff; cursor: auto;" placeholder="Carbon Name"> -->
+					</div>
+					<div class="col-md-5">
+						<div class="text-right">
+							<button type="button" class="btn btn-info">Share Molecule </button>
+							<button type="button" class="btn btn-info">Load Molecule </button>
+						</div>
+					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-4">.col-md-4</div>
-					<div class="col-md-4">.col-md-4</div>
-					<div class="col-md-4">.col-md-4</div>
+				<div style="margin-top: 10px; margin-bottom: 10px" class="row">
+					<div class="col-md-6">
+						<!-- Standard button -->
+						<button type="button" class="btn btn-primary">Carbon </button>
+						<!-- <button type="button" class="btn btn-info">Alcohol </button> -->
+						<button type="button" class="btn btn-danger">Oxygen </button>
+						<button type="button" class="btn btn-info">Nitrogen </button>
+						
+						<div class="btn-group">
+						  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+						    Halogens <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" role="menu">
+						    <li><a href="#">Chlorine (Cl)</a></li>
+						    <li><a href="#">Bromine (Br)</a></li>
+						    <li><a href="#">Iodine (I)</a></li>
+						    <li><a href="#">Fluorine (F)</a></li>
+						  </ul>
+						</div>
+						<div class="btn-group">
+						  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+						    Bonds <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" role="menu">
+						    <li><a href="#">Single Bond</a></li>
+						    <li><a href="#">Double Bond</a></li>
+						    <li><a href="#">Triple Bond</a></li>
+						  </ul>
+						</div>
+					</div>
+					<div class="col-md-4">
+						
+					</div>
 				</div>
 			</div>
 			<div id="moleculeDisplay" style="border: 1px solid black;" class="row"></div>
