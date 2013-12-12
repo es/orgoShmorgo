@@ -39,10 +39,19 @@
 				<div style="margin-top: 10px; margin-bottom: 10px" class="row">
 					<div class="col-md-6">
 						<!-- Standard button -->
-						<button type="button" class="btn btn-primary">Carbon </button>
+						<button type="button" onclick="addCarbon()" class="btn btn-primary">Carbon </button>
 						<!-- <button type="button" class="btn btn-info">Alcohol </button> -->
-						<button type="button" class="btn btn-danger">Oxygen </button>
-						<button type="button" class="btn btn-info">Nitrogen </button>
+						<div class="btn-group">
+						  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+						    Functional Groups <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" role="menu">
+						    <li><a href="#">Oxygen </a></li>
+						    <li><a href="#">Nitrogen </a></li>
+						  </ul>
+						</div>
+						<!-- <button type="button" class="btn btn-danger">Oxygen </button> -->
+						<!-- <button type="button" class="btn btn-info">Nitrogen </button> -->
 						
 						<div class="btn-group">
 						  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
@@ -65,13 +74,15 @@
 						    <li><a href="#">Triple Bond</a></li>
 						  </ul>
 						</div>
+						<button type="button" class="btn btn-danger">Delete Atom </button>
+
 					</div>
 					<div class="col-md-4">
 						
 					</div>
 				</div>
 			</div>
-			<div id="moleculeDisplay" style="border: 1px solid black;" class="row"></div>
+			<div id="moleculeDisplay" style="border: 1px solid black; background-color: #FFF" class="row"></div>
 		</div>
 
 		<!-- Javascript -->
