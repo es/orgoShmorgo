@@ -11,12 +11,12 @@
 
 	var atomSelected;
 	var atomClicked = function (dataPoint) {
-	 	/*console.log ("atom:", dataPoint);
+	 	console.log ("atom:", dataPoint);
 	 	console.log ("this:", this);
 	 	console.log("this.firstElementChild:", this.firstElementChild);
-	 	console.log("this.firstElementChild+d3:", d3.select(this.firstElementChild));*/
+	 	console.log("this.firstElementChild+d3:", d3.select(this.firstElementChild));
 	 	
-	 	if (dataPoint.atom === "H")
+	 	if (dataPoint.symbol === "H")
 	 		return;
 
 	 	if (atomSelected)
@@ -97,12 +97,12 @@
 	  	link = link.data(links);
 		  
 		  // Create new links
-		  link.enter().append("g")
+		  link.enter().insert("g", ".node")
 		      .attr("class", "link")
 		      .each(function(d) {
 		      	// Add bond line
 		      	d3.select(this)
-		      		.insert("line", ".node")
+		      		.append("line")
 							.style("stroke-width", function(d) { return (d.bond * 2 - 1) * 2 + "px"; });
 
 						// If double add second line
@@ -125,18 +125,19 @@
 		  node.enter().append("g")
 		      .attr("class", "node")
 		      .each(function(d) {
+		      	console.log('d:', d);
 		      	// Add node circle
 			      d3.select(this)
 			      	.append("circle")
 		      		.attr("r", function(d) { return radius(d.size); })
-		      		.style("fill", function(d) { return color(d.atom); });
+		      		.style("fill", function(d) { return color(d.symbol); });
 
 		        // Add atom symbol
 			      d3.select(this)
 			      	.append("text")
 							.attr("dy", ".35em")
 							.attr("text-anchor", "middle")
-							.text(function(d) { return d.atom; });
+							.text(function(d) { return d.id/*d.symbol*/; });
 
 						// Give atom the power to be selected
 						d3.select(this)
@@ -153,13 +154,17 @@
 		  force.start();
 	  }
 
-	  window.addCarbon = function () {
-	  	console.log("Adding Carbon");
-	  	updateMolecule();
-	  };
-
-	  function updateMolecule () {
-			if (!atomSelected) {
+	  window.addAtom = function (atomType) {
+	  	console.log("Adding new atom:", atomType);
+	  	if (!atomType) {
+	  		Messenger().post({
+				  message: 'Internal error :(',
+				  type: 'error',
+				  showCloseButton: true
+				});
+				return;
+	  	}
+	  	else if (!atomSelected) {
 				Messenger().post({
 				  message: 'No atom selected.',
 				  type: 'error',
@@ -167,44 +172,108 @@
 				});
 				return;
 			}
+			else if (!canHaveNewBond(getAtomData(atomSelected))) {
+				Messenger().post({
+				  message: 'Atom can\'t take anymore bonds.',
+				  type: 'error',
+				  showCloseButton: true
+				});
+			}
+			else
+	  		updateMolecule(atomType, atomDB[atomType].size);
+	  };
 
-			var newNode = {"atom": "C", "size": 12, x: randomX(), y: randomY(), id: generateRandomID ()},
+	 	function canHaveNewBond (atom) {
+	 		return atom.bonds < atomDB[atom.symbol].lonePairs;
+	 	}
+
+	 	function getAtomData (d3Atom) {
+	 		return d3Atom[0][0].parentNode.__data__;
+	 	}
+
+	  function updateMolecule (atomType, atomSize) {
+			var newNode = {
+						"symbol": atomType,
+						"size": atomSize,
+						x: randomX(),
+						y: randomY(),
+						id: generateRandomID (),
+						bonds: 1
+					},
 		  		n = nodes.push(newNode);
 
-		 	var targetNode = nodes[atomSelected[0][0].parentNode.__data__.index]; //could probs be simplified
+		  getAtomData(atomSelected).bonds++; // Increment bond count on selected atom
+		 	
+		 	var targetNode = nodes[getAtomData(atomSelected).index]; //could probs be simplified
 		  links.push({source: newNode, target: targetNode, bond: 1});
-	  	
+
 	  	buildMolecule();
 	  }
 
-	  window.deleteAtom = function () {
-	  	if (!atomSelected) {
-				Messenger().post({
-				  message: 'No atom selected.',
-				  type: 'error',
-				  showCloseButton: true
-				});
-				return;
-			}
+	  /*
+		 * Deal with in diff branch
+	   */
+	  // window.deleteAtom = function () {
+	  // 	if (!atomSelected) {
+			// 	Messenger().post({
+			// 	  message: 'No atom selected.',
+			// 	  type: 'error',
+			// 	  showCloseButton: true
+			// 	});
+			// 	return;
+			// }
 
-			var atomSelectedObj = atomSelected[0][0].parentNode.__data__;
-			var target, source;
-			console.log('atomSelectedObj.id:', atomSelectedObj.id);
-			for (var i = links.length - 1; i >= 0; i--) {
-				target = links[i].target, source = links[i].source;
-				console.log('target.id:', target.id);
-				console.log('source.id:', source.id);
-				if (target.id === atomSelectedObj.id || source.id === atomSelectedObj.id) {
-					console.log('target:', target);
-					console.log('source:', source);
-					links.splice(i, 1);
-				}
-			}
+			// var atomSelectedObj = getAtomData(atomSelected);
+			// var target, source;
+			// console.log('atomSelectedObj.id:', atomSelectedObj.id);
+			// var nodesToSpliceArr = [atomSelected.index];
 
-	  	nodes.splice(atomSelected.index, 1);
-	  	atomSelected = null;
-	  	buildMolecule ();
-	  };
+			// // Delete bonded atoms
+			// for (var i = links.length - 1; i >= 0; i--) {
+			// 	target = links[i].target, source = links[i].source;
+			// 	if (target.id === atomSelectedObj.id || source.id === atomSelectedObj.id) {
+			// 		links.splice(i, 1);
+					
+			// 		if (target.id === atomSelectedObj.id && target.symbol === 'H') {
+			// 			console.log('destroyNode-target.id:', target.id);
+			// 			nodesToSpliceArr.push(target.index);
+			// 			removeNeighbourAtom (target);
+			// 		}
+			// 		if (source.id === atomSelectedObj.id && source.symbol === 'H') {
+			// 			console.log('destroyNode-source.id:', source.id);
+			// 			nodesToSpliceArr.push(source.index);
+			// 			removeNeighbourAtom (source);
+			// 		}
+			// 	}
+			// }
+
+	  // 	nodesToSpliceArr.sort(function (a, b) {
+			// 	  if (a < b)
+			// 	     return -1;
+			// 	  if (a > b)
+			// 	     return 1;
+			// 	  return 0;
+	  // 	});
+
+	  // 	for (var i = nodesToSpliceArr.length - 1; i >= 0; i--) {
+	  // 		nodes.splice(nodesToSpliceArr[i], 1);
+	  // 	}
+	  // 	atomSelected = null;
+	  // 	buildMolecule ();
+	  // };
+
+	  // function removeNeighbourAtom (atomToRemove) {
+			// var target, source;
+			// for (var i = links.length - 1; i >= 0; i--) {
+			// 	target = links[i].target, source = links[i].source;
+			// 	if (target.id === atomToRemove.id || source.id === atomToRemove.id) {
+			// 		console.log('spliceLink-target.id:', target.id);
+			// 		console.log('spliceLink-source.id:', source.id);
+			// 		links.splice(i, 1);
+			// 	}
+			// }
+	  // 	/*nodes.splice(atomToRemove.index, 1);*/
+	  // }
 
 	  function tick() {
 	  	//Update old and new elements

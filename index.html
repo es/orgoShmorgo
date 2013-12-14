@@ -40,14 +40,14 @@
 				<div style="margin-top: 10px; margin-bottom: 10px" class="row">
 					<div class="col-md-6">
 						<!-- Standard button -->
-						<button type="button" onclick="addCarbon()" class="btn btn-primary">Carbon </button>
+						<button type="button" onclick="addAtom('C')" class="btn btn-primary">Carbon </button>
 						<div class="btn-group">
 						  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
 						    Functional Groups <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" role="menu">
-						    <li><a href="#">Oxygen (O)</a></li>
-						    <li><a href="#">Nitrogen (N)</a></li>
+						    <li><a href="#" onclick="addAtom('O')">Oxygen (O)</a></li>
+						    <li><a href="#" onclick="addAtom('N')">Nitrogen (N)</a></li>
 						  </ul>
 						</div>
 						<div class="btn-group">
@@ -55,10 +55,10 @@
 						    Halogens <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" role="menu">
-						    <li><a href="#">Chlorine (Cl)</a></li>
-						    <li><a href="#">Bromine (Br)</a></li>
-						    <li><a href="#">Iodine (I)</a></li>
-						    <li><a href="#">Fluorine (F)</a></li>
+						    <li><a href="#" onclick="addAtom('Cl')">Chlorine (Cl)</a></li>
+						    <li><a href="#" onclick="addAtom('Br')">Bromine (Br)</a></li>
+						    <li><a href="#" onclick="addAtom('I')">Iodine (I)</a></li>
+						    <li><a href="#" onclick="addAtom('F')">Fluorine (F)</a></li>
 						  </ul>
 						</div>
 						<div class="btn-group">
@@ -94,6 +94,7 @@
 		</script>
 		<script type="text/javascript" src="assets/libs/d3/d3.v3.min.js"></script>
 		<script type="text/javascript" src="assets/libs/glow.js"></script>
+		<script type="text/javascript" src="assets/js/atomDB.js"></script>
 		<script type="text/javascript" src="assets/js/main.js"></script>
 	</body>
 </html>

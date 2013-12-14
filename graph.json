@@ -1,18 +1,18 @@
 {
   "nodes": [
-    {"atom": "C", "size": 12, "bonds": 4, "id":1},
-    {"atom": "C", "size": 12, "bonds": 4, "id":2},
-    {"atom": "C", "size": 12, "bonds": 3, "id":3},
-    {"atom": "N", "size": 14, "bonds": 3, "id":4},
-    {"atom": "H", "size": 1, "bonds": 1, "id":5},
-    {"atom": "O", "size": 16, "bonds": 2, "id":6},
-    {"atom": "O", "size": 16, "bonds": 1, "id":7},
-    {"atom": "H", "size": 1, "bonds": 1, "id":8},
-    {"atom": "H", "size": 1, "bonds": 1, "id":9},
-    {"atom": "H", "size": 1, "bonds": 1, "id":10},
-    {"atom": "H", "size": 1, "bonds": 1, "id":11},
-    {"atom": "H", "size": 1, "bonds": 1, "id":12},
-    {"atom": "H", "size": 1, "bonds": 1, "id":13}
+    {"symbol": "C", "size": 12, "bonds": 4, "id":1},
+    {"symbol": "C", "size": 12, "bonds": 4, "id":2},
+    {"symbol": "C", "size": 12, "bonds": 3, "id":3},
+    {"symbol": "N", "size": 14, "bonds": 3, "id":4},
+    {"symbol": "H", "size": 1, "bonds": 1, "id":5},
+    {"symbol": "O", "size": 16, "bonds": 2, "id":6},
+    {"symbol": "O", "size": 16, "bonds": 1, "id":7},
+    {"symbol": "H", "size": 1, "bonds": 1, "id":8},
+    {"symbol": "H", "size": 1, "bonds": 1, "id":9},
+    {"symbol": "H", "size": 1, "bonds": 1, "id":10},
+    {"symbol": "H", "size": 1, "bonds": 1, "id":11},
+    {"symbol": "H", "size": 1, "bonds": 1, "id":12},
+    {"symbol": "H", "size": 1, "bonds": 1, "id":13}
   ],
   "links": [
     {"source": 0, "target": 1,  "bond": 1},
