@@ -9,38 +9,46 @@
 	var radius = d3.scale.sqrt()
 	    .range([0, 6]);
 
-	var atom;
+	var atomSelected;
 	var atomClicked = function (dataPoint) {
-	 	console.log ("atom:", dataPoint);
+	 	/*console.log ("atom:", dataPoint);
 	 	console.log ("this:", this);
 	 	console.log("this.firstElementChild:", this.firstElementChild);
-	 	console.log("this.firstElementChild+d3:", d3.select(this.firstElementChild));
+	 	console.log("this.firstElementChild+d3:", d3.select(this.firstElementChild));*/
 	 	
 	 	if (dataPoint.atom === "H")
 	 		return;
 
-	 	if (atom)
-	 		atom.style("filter", "");
+	 	if (atomSelected)
+	 		atomSelected.style("filter", "");
 
-	 	atom = d3.select(this)
+	 	atomSelected = d3.select(this)
 	 					 			.select("circle")
 	 						    .style("filter", "url(#nodeGlow)");
 	};
 
-	var bond;
+	var bondSelected;
 	var bondClicked = function (dataPoint) {
 	 	/*console.log ("bond:", dataPoint);
 	 	console.log ("this:", this);
 	 	console.log("this.firstElementChild:", this.firstElementChild);
 	 	console.log("this.firstElementChild+d3:", d3.select(this.firstElementChild));*/
 	 	
-	 	if (bond)
-	 		bond.style("filter", "");
+	 	if (bondSelected)
+	 		bondSelected.style("filter", "");
 
-	 	bond = d3.select(this)
-	 								.select("line")
-	 						    .style("filter", "url(#lineGlow)");
+	 	bondSelected = d3.select(this)
+	 									 .select("line")
+	 						    	 .style("filter", "url(#lineGlow)");
 	};
+
+	var generateRandomID = function () {
+		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+		  var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+		  return v.toString(16);
+		});
+	}
+	
 
 	var nodeGlow = glow("nodeGlow").rgb("#0000A0").stdDeviation(7);
 	var lineGlow = glow("lineGlow").rgb("#000").stdDeviation(7);
@@ -63,48 +71,28 @@
 	  return Math.floor(Math.random() * (max - min + 1) + min);
 	}
 
-	/*var force = d3.layout.force()
-	    .size([width, height])
-	    .charge(-400)
-	    .linkDistance(function(d) { return radius(d.source.size) + radius(d.target.size) + 20; })
-	    .nodes([{"atom": "C", "size": 12}]);*/
-
 	d3.json("graph.json", function(graph) {
 	  console.log(graph);
 	  var nodesList = graph.nodes;
 	  var linksList = graph.links;
-	  
-	  /*force
-	      .nodes(nodesList)
-	      .links(linksList)
-	      .on("tick", tick)
-	      .start();*/
-	  /*force.on("tick", tick);*/
 
 	  var force = d3.layout.force()
-	  										 .nodes(graph.nodes)
-		    								 .links(graph.links)
-	    /*.size([width, height])
-	    .charge(-400)
-	    .linkDistance(function(d) { return radius(d.source.size) + radius(d.target.size) + 20; })
-	    .nodes(graph.nodes)
-	    .links(graph.links)
-	    .on("tick", tick)*/;
+	    						.nodes(nodesList)
+	    						.links(linksList)
+	    						.size([width, height])
+	    						.charge(-400)
+	    						.linkDistance(function(d) { return radius(d.source.size) + radius(d.target.size) + 20; })
+	    						.on("tick", tick);
 
 	  var links = force.links(),
 	  		nodes = force.nodes(),
 	  		link = svg.selectAll(".link"),
 	  		node = svg.selectAll(".node");
 
-	 	function bigBang () {
-	  	links = links.concat(linksList);
-	  	nodes = nodes.concat(nodesList);
-	  	buildMolecule();
-	  }
-
-	  bigBang();
+	  buildMolecule();
 
 	  function buildMolecule () {
+
 	  	// Update link data
 	  	link = link.data(links);
 		  
@@ -112,13 +100,19 @@
 		  link.enter().append("g")
 		      .attr("class", "link")
 		      .each(function(d) {
-		      	d3.select(this).append("line")
-													 .style("stroke-width", function(d) { return (d.bond * 2 - 1) * 2 + "px"; });
+		      	// Add bond line
+		      	d3.select(this)
+		      		.insert("line", ".node")
+							.style("stroke-width", function(d) { return (d.bond * 2 - 1) * 2 + "px"; });
 
-						d3.select(this).filter(function(d) { return d.bond > 1; }).append("line")
-													 .attr("class", "separator");
+						// If double add second line
+						d3.select(this)
+							.filter(function(d) { return d.bond > 1; }).append("line")
+							.attr("class", "separator");
 
-						d3.select(this).on("click", bondClicked);
+						// Give bond the power to be selected
+						d3.select(this)
+							.on("click", bondClicked);
 		      });
 		  
 		  // Delete removed links
@@ -130,52 +124,87 @@
 	    // Create new nodes
 		  node.enter().append("g")
 		      .attr("class", "node")
-		      .on("click", atomClicked)
 		      .each(function(d) {
-		      	console.count('d:', d);
 		      	// Add node circle
-			      d3.select(this).append("circle")
-		      								 .attr("r", function(d) { return radius(d.size); })
-		      								 .style("fill", function(d) { return color(d.atom); });
+			      d3.select(this)
+			      	.append("circle")
+		      		.attr("r", function(d) { return radius(d.size); })
+		      		.style("fill", function(d) { return color(d.atom); });
 
 		        // Add atom symbol
-			      d3.select(this).append("text")
-										       .attr("dy", ".35em")
-										       .attr("text-anchor", "middle")
-										       .text(function(d) { return d.atom; });
-			    }).call(force.drag);
+			      d3.select(this)
+			      	.append("text")
+							.attr("dy", ".35em")
+							.attr("text-anchor", "middle")
+							.text(function(d) { return d.atom; });
+
+						// Give atom the power to be selected
+						d3.select(this)
+							.on("click", atomClicked);
+
+						// Grant atom the power of gravity	
+						d3.select(this)
+							.call(force.drag);
+			    });
 
 		  // Delete removed nodes
 	    node.exit().remove();
 
-		  //debugger;
-		  /*force.start();*/
-		  force
-		    .size([width, height])
-		    .charge(-400)
-		    .linkDistance(function(d) { return radius(d.source.size) + radius(d.target.size) + 20; })
-		    .on("tick", tick)
-		    .start();
+		  force.start();
 	  }
 
 	  window.addCarbon = function () {
 	  	console.log("Adding Carbon");
-	  	//nodesList.push({"atom": "C", "size": 12, px: 100, py: 0, x: 100, y: 100});
 	  	updateMolecule();
 	  };
 
 	  function updateMolecule () {
-			if (!atom) return; 
+			if (!atomSelected) {
+				Messenger().post({
+				  message: 'No atom selected.',
+				  type: 'error',
+				  showCloseButton: true
+				});
+				return;
+			}
 
-			/*var nodeTings = {"atom": "C", "size": 12, x: 100, y: 100, px: 200, py: 200, weight: 1, index: nodes.length},*/
-			var nodeTings = {"atom": "C", "size": 12, x: randomX(), y: randomY(), mark:true, weight: 1},
-		  		n = nodes.push(nodeTings);
+			var newNode = {"atom": "C", "size": 12, x: randomX(), y: randomY(), id: generateRandomID ()},
+		  		n = nodes.push(newNode);
 
-		 	var targetNode = nodes[atom[0][0].parentNode.__data__.index]; //could probs be simplified
-		  links.push({source: nodeTings, target: targetNode, bond: 1});
+		 	var targetNode = nodes[atomSelected[0][0].parentNode.__data__.index]; //could probs be simplified
+		  links.push({source: newNode, target: targetNode, bond: 1});
 	  	
 	  	buildMolecule();
 	  }
+
+	  window.deleteAtom = function () {
+	  	if (!atomSelected) {
+				Messenger().post({
+				  message: 'No atom selected.',
+				  type: 'error',
+				  showCloseButton: true
+				});
+				return;
+			}
+
+			var atomSelectedObj = atomSelected[0][0].parentNode.__data__;
+			var target, source;
+			console.log('atomSelectedObj.id:', atomSelectedObj.id);
+			for (var i = links.length - 1; i >= 0; i--) {
+				target = links[i].target, source = links[i].source;
+				console.log('target.id:', target.id);
+				console.log('source.id:', source.id);
+				if (target.id === atomSelectedObj.id || source.id === atomSelectedObj.id) {
+					console.log('target:', target);
+					console.log('source:', source);
+					links.splice(i, 1);
+				}
+			}
+
+	  	nodes.splice(atomSelected.index, 1);
+	  	atomSelected = null;
+	  	buildMolecule ();
+	  };
 
 	  function tick() {
 	  	//Update old and new elements
@@ -185,11 +214,7 @@
 	        .attr("x2", function(d) { return d.target.x; })
 	        .attr("y2", function(d) { return d.target.y; });
 
-	    node.attr("transform", function(d) {/*if (!d.mark)console.log("d:", d);*/return "translate(" + d.x + "," + d.y + ")"; });
-	    
-
-	    /*node.attr("cx", function(d) { return d.x; })
-      		.attr("cy", function(d) { return d.y; });*/
+	    node.attr("transform", function(d) {return "translate(" + d.x + "," + d.y + ")"; });
 	  }
 
 	});

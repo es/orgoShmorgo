@@ -11,6 +11,8 @@
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="assets/libs/bootstrap/css/bootstrap-3.0.3.min.css">
 		<link rel="stylesheet" type="text/css" href="assets/libs/bootswatch/flatly/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="assets/libs/messenger/css/messenger.css">
+		<link rel="stylesheet" type="text/css" href="assets/libs/messenger/css/messenger-theme-flat.css">
 		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
 		
 	</head>
@@ -27,7 +29,6 @@
 					        <button class="btn btn-default" type="button">Name The Molecule</button>
 					      </span>
 					    </div><!-- /input-group -->
-						<!-- <input disabled type="text" class="form-control" style="background-color: #fff; cursor: auto;" placeholder="Carbon Name"> -->
 					</div>
 					<div class="col-md-5">
 						<div class="text-right">
@@ -40,19 +41,15 @@
 					<div class="col-md-6">
 						<!-- Standard button -->
 						<button type="button" onclick="addCarbon()" class="btn btn-primary">Carbon </button>
-						<!-- <button type="button" class="btn btn-info">Alcohol </button> -->
 						<div class="btn-group">
 						  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
 						    Functional Groups <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" role="menu">
-						    <li><a href="#">Oxygen </a></li>
-						    <li><a href="#">Nitrogen </a></li>
+						    <li><a href="#">Oxygen (O)</a></li>
+						    <li><a href="#">Nitrogen (N)</a></li>
 						  </ul>
 						</div>
-						<!-- <button type="button" class="btn btn-danger">Oxygen </button> -->
-						<!-- <button type="button" class="btn btn-info">Nitrogen </button> -->
-						
 						<div class="btn-group">
 						  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
 						    Halogens <span class="caret"></span>
@@ -74,8 +71,7 @@
 						    <li><a href="#">Triple Bond</a></li>
 						  </ul>
 						</div>
-						<button type="button" class="btn btn-danger">Delete Atom </button>
-
+						<button type="button" onclick="deleteAtom()" class="btn btn-danger">Delete Atom </button>
 					</div>
 					<div class="col-md-4">
 						
@@ -88,6 +84,14 @@
 		<!-- Javascript -->
 		<script type="text/javascript" src="assets/libs/jquery/jquery-1.10.2.min.js"></script>
 		<script type="text/javascript" src="assets/libs/bootstrap/js/bootstrap-3.0.3.min.js"></script>
+		<script type="text/javascript" src="assets/libs/messenger/js/messenger.min.js"></script>
+		<script type="text/javascript" src="assets/libs/messenger/js/messenger-theme-flat.js"></script>
+		<script type="text/javascript">
+			Messenger.options = {
+			    extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
+			    theme: 'flat'
+			};
+		</script>
 		<script type="text/javascript" src="assets/libs/d3/d3.v3.min.js"></script>
 		<script type="text/javascript" src="assets/libs/glow.js"></script>
 		<script type="text/javascript" src="assets/js/main.js"></script>
