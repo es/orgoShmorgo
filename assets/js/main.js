@@ -283,7 +283,7 @@
 		  getAtomData(atomSelected).bonds++; // Increment bond count on selected atom
 		 	addHydrogens(newAtom); // Adds hydrogens to new atom
 		 	
-		 	removeHydrogen(getAtomData(atomSelected)); // Remove hydrogen from selected atom
+		 	//removeHydrogen(getAtomData(atomSelected)); // Remove hydrogen from selected atom
 
 		  links.push({source: newAtom, target: getAtomData(atomSelected), bond: 1, id: generateRandomID()}); // Need to make sure is unique
 		  
