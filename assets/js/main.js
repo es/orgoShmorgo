@@ -12,9 +12,9 @@
 	var atomSelected;
 	var atomClicked = function (dataPoint) {
 	 	console.log ("atom:", dataPoint);
-	 	console.log ("this:", this);
-	 	console.log("this.firstElementChild:", this.firstElementChild);
-	 	console.log("this.firstElementChild+d3:", d3.select(this.firstElementChild));
+	 	/*console.log ("this:", this);*/
+	 	/*console.log("this.firstElementChild:", this.firstElementChild);*/
+	 	/*console.log("this.firstElementChild+d3:", d3.select(this.firstElementChild));*/
 	 	
 	 	if (dataPoint.symbol === "H")
 	 		return;
@@ -29,8 +29,8 @@
 
 	var bondSelected;
 	var bondClicked = function (dataPoint) {
-	 	/*console.log ("bond:", dataPoint);
-	 	console.log ("this:", this);
+	 	console.log ("bond:", dataPoint);
+	 	/*console.log ("this:", this);
 	 	console.log("this.firstElementChild:", this.firstElementChild);
 	 	console.log("this.firstElementChild+d3:", d3.select(this.firstElementChild));*/
 	 	
@@ -59,14 +59,6 @@
 	    .call(nodeGlow)
 	    .call(lineGlow);
 
-  var randomX = function () {
-  	return getRandomInt (0, width);
-  };
-
-  var randomY = function () {
-  	return getRandomInt (0, height);
-  };
-
   var getRandomInt = function (min, max) {
 	  return Math.floor(Math.random() * (max - min + 1) + min);
 	}
@@ -92,9 +84,8 @@
 	  buildMolecule();
 
 	  function buildMolecule () {
-
 	  	// Update link data
-	  	link = link.data(links);
+	  	link = link.data(links, function (d) {return d.id; });
 		  
 		  // Create new links
 		  link.enter().insert("g", ".node")
@@ -116,16 +107,15 @@
 		      });
 		  
 		  // Delete removed links
-		  link.exit().remove();    
+		  link.exit().remove();   
 
 		  // Update node data
-	  	node = node.data(nodes);
+	  	node = node.data(nodes, function (d) {return d.id; });
 
 	    // Create new nodes
 		  node.enter().append("g")
 		      .attr("class", "node")
 		      .each(function(d) {
-		      	console.log('d:', d);
 		      	// Add node circle
 			      d3.select(this)
 			      	.append("circle")
@@ -150,6 +140,7 @@
 
 		  // Delete removed nodes
 	    node.exit().remove();
+ 
 
 		  force.start();
 	  }
@@ -191,89 +182,142 @@
 	 		return d3Atom[0][0].parentNode.__data__;
 	 	}
 
+	 	function addHydrogens (newAtom) {
+	 		var newHydrogen = function () {
+	 			return {
+		 			symbol: 'H',
+		 			size: '1',
+		 			bonds: 1,
+		 			id: generateRandomID (),
+		 			x: newAtom.x + getRandomInt (-15, 15),
+		 			y: newAtom.y + getRandomInt (-15, 15)
+		 		};
+	 		}
+	 		var tempHydrogen;
+	 		for (var i = 0, len = atomDB[newAtom.symbol].lonePairs - newAtom.bonds; i < len; i++) {
+	 			tempHydrogen = newHydrogen();
+	 			nodes.push(tempHydrogen);
+	 			links.push({source: newAtom, target: tempHydrogen, bond: 1, id: generateRandomID()});	
+	 		}
+	 	}
+
+	 	function removeHydrogen (oldAtom) {
+	 		var target, source;
+	 		console.log('oldAtom:', oldAtom);
+	 		for (var i = links.length - 1; i >= 0; i--) {
+	 			target = links[i].target, source = links[i].source;
+				if (target.id === oldAtom.id || source.id === oldAtom.id) {
+					if (source.symbol === 'H')
+						removeAtom(source.id);
+					else
+						removeAtom(target.id);
+					return;
+				}
+	 		}
+	 	}
+
+	 	function removeAtom (id) {
+	 		var atomToRemove = retriveAtom(id);
+	 		var bondsArr = [];
+	 		var atomsArr = [atomToRemove];
+	 		
+	 		for (var i = links.length - 1; i >= 0; i--) {
+	 			if (links[i].source.id === id || links[i].target.id === id) {
+	 				bondsArr.push(links[i]);
+	 				if (links[i].source.symbol === 'H')
+	 					atomsArr.push(links[i].source);
+	 				else if (links[i].target.symbol === 'H')
+	 					atomsArr.push(links[i].target);
+	 				else {
+							var nonHydrogenAtom = links[i].target.id !== id ? 
+																										 	'target':
+																											'source';
+							links[i][nonHydrogenAtom].bonds--;
+		 					if (links[i].bond === 2)
+		 						links[i][nonHydrogenAtom].bonds--;
+		 					if (links[i].bond === 3)
+		 						links[i][nonHydrogenAtom].bonds--;
+		 					addHydrogens(links[i][nonHydrogenAtom]);
+	 				}
+	 			}
+	 		}
+
+	 		nodes = nodes.filter(function (tempAtom) {
+	 			for (var i = atomsArr.length - 1; i >= 0; i--) {
+	 				if (atomsArr[i].id === tempAtom.id) {
+	 					console.log('atomsArr[' + i + ']:', atomsArr[i]);
+	 					return false;
+	 				}
+	 			}
+	 			return true;
+	 		});
+
+	 		links = links.filter(function (tempBond) {
+	 			for (var i = bondsArr.length - 1; i >= 0; i--) {
+	 				if (bondsArr[i].source.id === tempBond.source.id && bondsArr[i].target.id === tempBond.target.id && bondsArr[i].bond === tempBond.bond)
+	 					return false;
+	 			}
+	 			return true;
+	 		});
+	 	}
+
+	 	function retriveAtom (atomID) {
+	 		for (var i = nodes.length - 1; i >= 0; i--) {
+	 			if (nodes[i].id === atomID)
+	 				return nodes[i];
+	 		}
+	 		return null;
+	 	}
+
 	  function updateMolecule (atomType, atomSize) {
-			var newNode = {
-						"symbol": atomType,
-						"size": atomSize,
-						x: randomX(),
-						y: randomY(),
-						id: generateRandomID (),
+			var newAtom = {
+						symbol: atomType,
+						size: atomSize,
+						x: getAtomData(atomSelected).x + getRandomInt (-15, 15),
+						y: getAtomData(atomSelected).y + getRandomInt (-15, 15),
+						id: generateRandomID (), // Need to make sure is unique
 						bonds: 1
 					},
-		  		n = nodes.push(newNode);
+		  		n = nodes.push(newAtom);
 
 		  getAtomData(atomSelected).bonds++; // Increment bond count on selected atom
+		 	addHydrogens(newAtom); // Adds hydrogens to new atom
 		 	
-		 	var targetNode = nodes[getAtomData(atomSelected).index]; //could probs be simplified
-		  links.push({source: newNode, target: targetNode, bond: 1});
+		 	removeHydrogen(getAtomData(atomSelected)); // Remove hydrogen from selected atom
 
+		  links.push({source: newAtom, target: getAtomData(atomSelected), bond: 1, id: generateRandomID()}); // Need to make sure is unique
+		  
 	  	buildMolecule();
 	  }
 
 	  /*
 		 * Deal with in diff branch
 	   */
-	  // window.deleteAtom = function () {
-	  // 	if (!atomSelected) {
-			// 	Messenger().post({
-			// 	  message: 'No atom selected.',
-			// 	  type: 'error',
-			// 	  showCloseButton: true
-			// 	});
-			// 	return;
-			// }
+	  window.deleteAtom = function () {
+	  	if (!atomSelected) {
+				Messenger().post({
+				  message: 'No atom selected.',
+				  type: 'error',
+				  showCloseButton: true
+				});
+				return;
+			}
+			removeAtom(getAtomData(atomSelected).id);
+			buildMolecule ();
+	  };
 
-			// var atomSelectedObj = getAtomData(atomSelected);
-			// var target, source;
-			// console.log('atomSelectedObj.id:', atomSelectedObj.id);
-			// var nodesToSpliceArr = [atomSelected.index];
-
-			// // Delete bonded atoms
-			// for (var i = links.length - 1; i >= 0; i--) {
-			// 	target = links[i].target, source = links[i].source;
-			// 	if (target.id === atomSelectedObj.id || source.id === atomSelectedObj.id) {
-			// 		links.splice(i, 1);
-					
-			// 		if (target.id === atomSelectedObj.id && target.symbol === 'H') {
-			// 			console.log('destroyNode-target.id:', target.id);
-			// 			nodesToSpliceArr.push(target.index);
-			// 			removeNeighbourAtom (target);
-			// 		}
-			// 		if (source.id === atomSelectedObj.id && source.symbol === 'H') {
-			// 			console.log('destroyNode-source.id:', source.id);
-			// 			nodesToSpliceArr.push(source.index);
-			// 			removeNeighbourAtom (source);
-			// 		}
-			// 	}
-			// }
-
-	  // 	nodesToSpliceArr.sort(function (a, b) {
-			// 	  if (a < b)
-			// 	     return -1;
-			// 	  if (a > b)
-			// 	     return 1;
-			// 	  return 0;
-	  // 	});
-
-	  // 	for (var i = nodesToSpliceArr.length - 1; i >= 0; i--) {
-	  // 		nodes.splice(nodesToSpliceArr[i], 1);
-	  // 	}
-	  // 	atomSelected = null;
-	  // 	buildMolecule ();
-	  // };
-
-	  // function removeNeighbourAtom (atomToRemove) {
-			// var target, source;
-			// for (var i = links.length - 1; i >= 0; i--) {
-			// 	target = links[i].target, source = links[i].source;
-			// 	if (target.id === atomToRemove.id || source.id === atomToRemove.id) {
-			// 		console.log('spliceLink-target.id:', target.id);
-			// 		console.log('spliceLink-source.id:', source.id);
-			// 		links.splice(i, 1);
-			// 	}
-			// }
-	  // 	/*nodes.splice(atomToRemove.index, 1);*/
-	  // }
+	  function removeNeighbourAtom (atomToRemove) {
+			var target, source;
+			for (var i = links.length - 1; i >= 0; i--) {
+				target = links[i].target, source = links[i].source;
+				if (target.id === atomToRemove.id || source.id === atomToRemove.id) {
+					console.log('spliceLink-target.id:', target.id);
+					console.log('spliceLink-source.id:', source.id);
+					links.splice(i, 1);
+				}
+			}
+	  	/*nodes.splice(atomToRemove.index, 1);*/
+	  }
 
 	  function tick() {
 	  	//Update old and new elements
