@@ -64,7 +64,6 @@
 	}
 
 	d3.json("graph.json", function(graph) {
-	  console.log(graph);
 	  var nodesList = graph.nodes;
 	  var linksList = graph.links;
 
@@ -145,7 +144,6 @@
 	  }
 
 	  window.addAtom = function (atomType) {
-	  	console.log("Adding new atom:", atomType);
 	  	if (!atomType) {
 	  		Messenger().post({
 				  message: 'Internal error :(',
@@ -156,7 +154,7 @@
 	  	}
 	  	else if (!atomSelected) {
 				Messenger().post({
-				  message: 'No atom selected.',
+				  message: 'No Atom Selected',
 				  type: 'error',
 				  showCloseButton: true
 				});
@@ -164,13 +162,13 @@
 			}
 			else if (!canHaveNewBond(getAtomData(atomSelected))) {
 				Messenger().post({
-				  message: 'Atom can\'t take anymore bonds.',
+				  message: 'Atom Can\'t Take Anymore Bonds',
 				  type: 'error',
 				  showCloseButton: true
 				});
 			}
 			else
-	  		updateMolecule(atomType, atomDB[atomType].size);
+	  		addNewAtom(atomType, atomDB[atomType].size);
 	  };
 
 	 	function canHaveNewBond (atom) {
@@ -182,7 +180,6 @@
 	 	}
 
 	 	function addHydrogens (atom, numHydrogens) {
-	 		console.log('numHydrogens:', numHydrogens);
 	 		var newHydrogen = function () {
 	 			return {
 		 			symbol: 'H',
@@ -197,13 +194,17 @@
 	 		for (var i = 0; i < numHydrogens; i++) {
 	 			tempHydrogen = newHydrogen();
 	 			nodes.push(tempHydrogen);
-	 			links.push({source: atom, target: tempHydrogen, bond: 1, id: generateRandomID()});	
+	 			links.push({
+	 				source: atom,
+	 				target: tempHydrogen, 
+	 				bond: 1, 
+	 				id: generateRandomID()
+	 			});	
 	 		}
 	 	}
 
 	 	function removeHydrogen (oldAtom) {
-	 		var target, source;
-	 		var bondsArr = getBonds(oldAtom.id);
+	 		var target, source, bondsArr = getBonds(oldAtom.id);
 	 		for (var i = bondsArr.length - 1; i >= 0; i--) {
 	 			target = bondsArr[i].target, source = bondsArr[i].source;
 				if (target.symbol === 'H' || source.symbol === 'H' ) {
@@ -222,11 +223,13 @@
 	 		var atomsArr = [atomToRemove.id];
 	 		
 	 		for (var i = bondsArr.length - 1; i >= 0; i--) {
+	 			// Add atom that is a hydrogen
 	 			if (bondsArr[i].source.symbol === 'H')
 	 				atomsArr.push(bondsArr[i].source.id);
 	 			else if (bondsArr[i].target.symbol === 'H')
-	 				atomsArr.push(bondsArr[i].target.id);
+	 				atomsArr.push(bondsArr[i].target.id); 
 	 			else {
+	 					// Give non-hydrogen bonded atom it's lone pairs back
 						var nonHydrogenAtom = bondsArr[i].target.id !== id ? 
 																									 	'target':
 																										'source';
@@ -234,6 +237,7 @@
 						bondsArr[i][nonHydrogenAtom].bonds -= bondsArr[i].bond;
 		 				addHydrogens(bondsArr[i][nonHydrogenAtom], bondsArr[i].bond);
 	 			}
+	 			// Convert atom obj to id for later processing
 	 			bondsArr[i] = bondsArr[i].id;
 	 		}
 
@@ -262,7 +266,7 @@
 	 		return null;
 	 	};
 
-	  function updateMolecule (atomType, atomSize) {
+	  function addNewAtom (atomType, atomSize) {
 			var newAtom = {
 						symbol: atomType,
 						size: atomSize,
@@ -328,6 +332,7 @@
 			}
 
 			removeAtom(getAtomData(atomSelected).id);
+			atomSelected = null;
 			buildMolecule ();
 	  };
 
