@@ -86,7 +86,7 @@
 	  function buildMolecule () {
 	  	// Update link data
 	  	link = link.data(links, function (d) {return d.id; });
-		  
+
 		  // Create new links
 		  link.enter().insert("g", ".node")
 		      .attr("class", "link")
@@ -104,10 +104,10 @@
 						// Give bond the power to be selected
 						d3.select(this)
 							.on("click", bondClicked);
-		      });
-		  
+		      }); 
+
 		  // Delete removed links
-		  link.exit().remove();   
+		  link.exit().remove(); 
 
 		  // Update node data
 	  	node = node.data(nodes, function (d) {return d.id; });
@@ -127,7 +127,7 @@
 			      	.append("text")
 							.attr("dy", ".35em")
 							.attr("text-anchor", "middle")
-							.text(function(d) { return d.id/*d.symbol*/; });
+							.text(function(d) { return d.symbol; });
 
 						// Give atom the power to be selected
 						d3.select(this)
@@ -140,7 +140,6 @@
 
 		  // Delete removed nodes
 	    node.exit().remove();
- 
 
 		  force.start();
 	  }
@@ -182,35 +181,36 @@
 	 		return d3Atom[0][0].parentNode.__data__;
 	 	}
 
-	 	function addHydrogens (newAtom) {
+	 	function addHydrogens (atom, numHydrogens) {
+	 		console.log('numHydrogens:', numHydrogens);
 	 		var newHydrogen = function () {
 	 			return {
 		 			symbol: 'H',
 		 			size: '1',
 		 			bonds: 1,
 		 			id: generateRandomID (),
-		 			x: newAtom.x + getRandomInt (-15, 15),
-		 			y: newAtom.y + getRandomInt (-15, 15)
+		 			x: atom.x + getRandomInt (-15, 15),
+		 			y: atom.y + getRandomInt (-15, 15)
 		 		};
-	 		}
+	 		};
 	 		var tempHydrogen;
-	 		for (var i = 0, len = atomDB[newAtom.symbol].lonePairs - newAtom.bonds; i < len; i++) {
+	 		for (var i = 0; i < numHydrogens; i++) {
 	 			tempHydrogen = newHydrogen();
 	 			nodes.push(tempHydrogen);
-	 			links.push({source: newAtom, target: tempHydrogen, bond: 1, id: generateRandomID()});	
+	 			links.push({source: atom, target: tempHydrogen, bond: 1, id: generateRandomID()});	
 	 		}
 	 	}
 
 	 	function removeHydrogen (oldAtom) {
 	 		var target, source;
-	 		console.log('oldAtom:', oldAtom);
-	 		for (var i = links.length - 1; i >= 0; i--) {
-	 			target = links[i].target, source = links[i].source;
-				if (target.id === oldAtom.id || source.id === oldAtom.id) {
-					if (source.symbol === 'H')
-						removeAtom(source.id);
-					else
-						removeAtom(target.id);
+	 		var bondsArr = getBonds(oldAtom.id);
+	 		for (var i = bondsArr.length - 1; i >= 0; i--) {
+	 			target = bondsArr[i].target, source = bondsArr[i].source;
+				if (target.symbol === 'H' || source.symbol === 'H' ) {
+					var hydroId = source.symbol === 'H'? 
+																		source.id: 
+																		target.id;
+					removeAtom(hydroId);
 					return;
 				}
 	 		}
@@ -218,56 +218,49 @@
 
 	 	function removeAtom (id) {
 	 		var atomToRemove = retriveAtom(id);
-	 		var bondsArr = [];
-	 		var atomsArr = [atomToRemove];
+	 		var bondsArr = getBonds(id);
+	 		var atomsArr = [atomToRemove.id];
 	 		
-	 		for (var i = links.length - 1; i >= 0; i--) {
-	 			if (links[i].source.id === id || links[i].target.id === id) {
-	 				bondsArr.push(links[i]);
-	 				if (links[i].source.symbol === 'H')
-	 					atomsArr.push(links[i].source);
-	 				else if (links[i].target.symbol === 'H')
-	 					atomsArr.push(links[i].target);
-	 				else {
-							var nonHydrogenAtom = links[i].target.id !== id ? 
-																										 	'target':
-																											'source';
-							links[i][nonHydrogenAtom].bonds--;
-		 					if (links[i].bond === 2)
-		 						links[i][nonHydrogenAtom].bonds--;
-		 					if (links[i].bond === 3)
-		 						links[i][nonHydrogenAtom].bonds--;
-		 					addHydrogens(links[i][nonHydrogenAtom]);
-	 				}
+	 		for (var i = bondsArr.length - 1; i >= 0; i--) {
+	 			if (bondsArr[i].source.symbol === 'H')
+	 				atomsArr.push(bondsArr[i].source.id);
+	 			else if (bondsArr[i].target.symbol === 'H')
+	 				atomsArr.push(bondsArr[i].target.id);
+	 			else {
+						var nonHydrogenAtom = bondsArr[i].target.id !== id ? 
+																									 	'target':
+																										'source';
+							
+						bondsArr[i][nonHydrogenAtom].bonds -= bondsArr[i].bond;
+		 				addHydrogens(bondsArr[i][nonHydrogenAtom], bondsArr[i].bond);
 	 			}
+	 			bondsArr[i] = bondsArr[i].id;
 	 		}
 
-	 		nodes = nodes.filter(function (tempAtom) {
-	 			for (var i = atomsArr.length - 1; i >= 0; i--) {
-	 				if (atomsArr[i].id === tempAtom.id) {
-	 					console.log('atomsArr[' + i + ']:', atomsArr[i]);
-	 					return false;
-	 				}
-	 			}
-	 			return true;
-	 		});
+	 		var spliceOut = function (arr, removeArr) {
+		 		for (var i = arr.length - 1; i >= 0; i--) {
+		 				if (removeArr.indexOf(arr[i].id) !== -1) {
+		 					arr.splice(i, 1);
+		 				}
+		 		}
+		 		return arr;
+		 	};
 
-	 		links = links.filter(function (tempBond) {
-	 			for (var i = bondsArr.length - 1; i >= 0; i--) {
-	 				if (bondsArr[i].source.id === tempBond.source.id && bondsArr[i].target.id === tempBond.target.id && bondsArr[i].bond === tempBond.bond)
-	 					return false;
-	 			}
-	 			return true;
-	 		});
-	 	}
+	 		// Remove atoms marked
+	 		nodes = spliceOut (nodes, atomsArr);
+	 		
+	 		// Remove bonds marked
+	 		links = spliceOut (links, bondsArr);
 
-	 	function retriveAtom (atomID) {
+	 	};
+
+	 	var retriveAtom = function  (atomID) {
 	 		for (var i = nodes.length - 1; i >= 0; i--) {
 	 			if (nodes[i].id === atomID)
 	 				return nodes[i];
 	 		}
 	 		return null;
-	 	}
+	 	};
 
 	  function updateMolecule (atomType, atomSize) {
 			var newAtom = {
@@ -281,43 +274,62 @@
 		  		n = nodes.push(newAtom);
 
 		  getAtomData(atomSelected).bonds++; // Increment bond count on selected atom
-		 	addHydrogens(newAtom); // Adds hydrogens to new atom
-		 	
-		 	//removeHydrogen(getAtomData(atomSelected)); // Remove hydrogen from selected atom
-
-		  links.push({source: newAtom, target: getAtomData(atomSelected), bond: 1, id: generateRandomID()}); // Need to make sure is unique
+		 	addHydrogens(newAtom, atomDB[atomType].lonePairs - 1); // Adds hydrogens to new atom
+		 	removeHydrogen(getAtomData(atomSelected)); // Remove hydrogen from selected atom
+		  
+		  links.push({
+		  	source: newAtom, 
+		  	target: getAtomData(atomSelected), 
+		  	bond: 1, 
+		  	id: generateRandomID()
+		  }); // Need to make sure is unique
 		  
 	  	buildMolecule();
+	  }
+
+	  var getBonds = function (atomID) {
+	  	var arr = [];
+	  	for (var i = links.length - 1; i >= 0; i--) {
+	  		if (links[i].source.id === atomID || links[i].target.id === atomID)
+	  			arr.push(links[i]);
+	  	}
+	  	return arr;
 	  }
 
 	  /*
 		 * Deal with in diff branch
 	   */
 	  window.deleteAtom = function () {
+	  	var oneNonHydrogenBond = function (atom) {
+	  		var atomBonds = getBonds(atom.id);
+	  		var counter = 0;
+	  		for (var i = atomBonds.length - 1; i >= 0; i--) {
+	  			if (atomBonds[i].source.symbol !== 'H' && atomBonds[i].target.symbol !== 'H')
+	  				counter++;
+	  		}
+	  		return counter === 1;
+	  	};
+
 	  	if (!atomSelected) {
 				Messenger().post({
-				  message: 'No atom selected.',
+				  message: 'No Atom Selected',
 				  type: 'error',
 				  showCloseButton: true
 				});
 				return;
 			}
+			else if (!oneNonHydrogenBond(getAtomData(atomSelected))) {
+				Messenger().post({
+				  message: 'Atom Must have only one non-hydrogen bond to be removed',
+				  type: 'error',
+				  showCloseButton: true
+				});
+				return;
+			}
+
 			removeAtom(getAtomData(atomSelected).id);
 			buildMolecule ();
 	  };
-
-	  function removeNeighbourAtom (atomToRemove) {
-			var target, source;
-			for (var i = links.length - 1; i >= 0; i--) {
-				target = links[i].target, source = links[i].source;
-				if (target.id === atomToRemove.id || source.id === atomToRemove.id) {
-					console.log('spliceLink-target.id:', target.id);
-					console.log('spliceLink-source.id:', source.id);
-					links.splice(i, 1);
-				}
-			}
-	  	/*nodes.splice(atomToRemove.index, 1);*/
-	  }
 
 	  function tick() {
 	  	//Update old and new elements
