@@ -1,9 +1,9 @@
 {
   "nodes": [
-    {"symbol": "C", "size": 12, "bonds": 4, "id":1},
-    {"symbol": "C", "size": 12, "bonds": 4, "id":2},
+    {"symbol": "C", "size": 12, "bonds": 1, "id":1},
+    {"symbol": "C", "size": 12, "bonds": 3, "id":2},
     {"symbol": "C", "size": 12, "bonds": 4, "id":3},
-    {"symbol": "N", "size": 14, "bonds": 3, "id":4},
+    {"symbol": "N", "size": 14, "bonds": 1, "id":4},
     {"symbol": "H", "size": 1, "bonds": 1, "id":5},
     {"symbol": "O", "size": 16, "bonds": 2, "id":6},
     {"symbol": "O", "size": 16, "bonds": 1, "id":7},
@@ -26,6 +26,6 @@
     {"source": 0, "target": 7,  "bond": 1, "id": 29},
     {"source": 0, "target": 8,  "bond": 1, "id": 210},
     {"source": 0, "target": 9,  "bond": 1, "id": 211},
-    {"source": 5, "target": 12, "bond": 1, "id": 212}
+    {"source": 6, "target": 12,  "bond": 1, "id": 212}
   ]
 }
