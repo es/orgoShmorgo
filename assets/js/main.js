@@ -104,7 +104,7 @@
 
 	$.getJSON("molecules.json", function(json) {
     moleculeExamples = json;
-    newMoleculeSimulation (moleculeExamples, 'default');
+    newMoleculeSimulation (moleculeExamples, '2-amino-propanoic_acid');
 	});
 	
 	var orgoShmorgo = function(graph) {
