@@ -9,13 +9,9 @@
 	var radius = d3.scale.sqrt()
 	    .range([0, 6]);
 
+	var selectionGlove = glow("selectionGlove").rgb("#0000A0").stdDeviation(7);
 	var atomSelected;
 	var atomClicked = function (dataPoint) {
-	 	console.log ("atom:", dataPoint);
-	 	/*console.log ("this:", this);*/
-	 	/*console.log("this.firstElementChild:", this.firstElementChild);*/
-	 	/*console.log("this.firstElementChild+d3:", d3.select(this.firstElementChild));*/
-	 	
 	 	if (dataPoint.symbol === "H")
 	 		return;
 
@@ -24,22 +20,24 @@
 
 	 	atomSelected = d3.select(this)
 	 					 			.select("circle")
-	 						    .style("filter", "url(#nodeGlow)");
+	 						    .style("filter", "url(#selectionGlove)");
 	};
 
 	var bondSelected;
 	var bondClicked = function (dataPoint) {
-	 	console.log ("bond:", dataPoint);
-	 	/*console.log ("this:", this);
-	 	console.log("this.firstElementChild:", this.firstElementChild);
-	 	console.log("this.firstElementChild+d3:", d3.select(this.firstElementChild));*/
-	 	
+	 	Messenger().post({
+				  message: 'New Bond Selected',
+				  type: 'info',
+				  hideAfter: 3,
+				  showCloseButton: true
+				});
+
 	 	if (bondSelected)
 	 		bondSelected.style("filter", "");
 
 	 	bondSelected = d3.select(this)
 	 									 .select("line")
-	 						    	 .style("filter", "url(#lineGlow)");
+	 						    	 .style("filter", "url(#selectionGlove)");
 	};
 
 	var generateRandomID = function () {
@@ -48,16 +46,11 @@
 		  return v.toString(16);
 		});
 	}
-	
-
-	var nodeGlow = glow("nodeGlow").rgb("#0000A0").stdDeviation(7);
-	var lineGlow = glow("lineGlow").rgb("#000").stdDeviation(7);
 
 	var svg = d3.select("#moleculeDisplay").append("svg")
 	    .attr("width", width)
 	    .attr("height", height)
-	    .call(nodeGlow)
-	    .call(lineGlow);
+	    .call(selectionGlove);
 
   var getRandomInt = function (min, max) {
 	  return Math.floor(Math.random() * (max - min + 1) + min);
@@ -93,12 +86,17 @@
 		      	// Add bond line
 		      	d3.select(this)
 		      		.append("line")
-							.style("stroke-width", function(d) { return (d.bond * 2 - 1) * 2 + "px"; });
+							.style("stroke-width", function(d) { return (d.bond * 3 - 2) * 2 + "px"; });
 
 						// If double add second line
 						d3.select(this)
-							.filter(function(d) { return d.bond > 1; }).append("line")
-							.attr("class", "separator");
+							.filter(function(d) { return d.bond >= 2; }).append("line")
+							.style("stroke-width", function(d) { return (d.bond * 2 - 2) * 2 + "px"; })
+							.attr("class", "double");
+
+						d3.select(this)
+							.filter(function(d) { return d.bond === 3; }).append("line")
+							.attr("class", "triple");
 
 						// Give bond the power to be selected
 						d3.select(this)
@@ -142,6 +140,87 @@
 
 		  force.start();
 	  }
+
+	  window.changeBond = function (bondType) {
+	  	if (!bondSelected) {
+				Messenger().post({
+				  message: 'No Bond Selected',
+				  type: 'error',
+				  showCloseButton: true
+				});
+				return;
+			}
+	  	var bondData = getAtomData(bondSelected);
+	  	var changeInCharge = bondType - bondData.bond;
+	  	var bondChangePossible = function (bond, newBondType) {
+	  		return (bond.target.bonds + changeInCharge <= atomDB[bond.target.symbol].lonePairs && bond.source.bonds + changeInCharge <= atomDB[bond.source.symbol].lonePairs);
+	  	};
+
+	  	if (!bondType || bondType < 1 || bondType > 3) {
+	  		Messenger().post({
+				  message: 'Internal error :(',
+				  type: 'error',
+				  showCloseButton: true
+				});
+				return;
+	  	}
+			else if (!bondChangePossible(bondData, bondType)) {
+				Messenger().post({
+				  message: 'That type of bond there will make Ms. Extavour mad and we don\'t want that. Quick pretend like you\'re doing chemistry!',
+				  type: 'error',
+				  showCloseButton: true
+				});
+				return;
+			}
+
+			for (var i = links.length - 1; i >= 0; i--) {
+				if (links[i].id === bondData.id) {
+					var changeInCharge = bondType - bondData.bond;
+					var source = retriveAtom(links[i].source.id),
+							target = retriveAtom(links[i].target.id);
+					if (changeInCharge === 2) {
+						removeHydrogen(source);
+						removeHydrogen(source);
+						removeHydrogen(target);
+						removeHydrogen(target);
+					}
+					else if (changeInCharge === 1) {
+						removeHydrogen(source);
+						removeHydrogen(target);
+					}
+					else if (changeInCharge === -1) {
+						addHydrogens(source, 1);
+						addHydrogens(target, 1);
+					}
+					else if (changeInCharge === -2) {
+						addHydrogens(source, 1);
+						addHydrogens(source, 1);
+						addHydrogens(target, 1);
+						addHydrogens(target, 1);
+					}
+					source.bonds += changeInCharge;
+					target.bonds += changeInCharge;
+					
+					// Remove old bond, create new one and add it to links list
+					// Simple change of bond value is buggy
+					links.splice(i, 1);
+					var newBond = {
+		 				source: bondData.source,
+		 				target: bondData.target, 
+		 				bond: bondType, 
+		 				id: generateRandomID()
+		 			};
+		 			links.push(newBond);
+		 			
+		 			// Clear previous bond selection
+		 			bondSelected.style("filter", "");
+		 			bondSelected = null;
+		 			
+		 			break;
+				}
+			}
+			buildMolecule();
+	  };
 
 	  window.addAtom = function (atomType) {
 	  	if (!atomType) {
@@ -300,9 +379,6 @@
 	  	return arr;
 	  }
 
-	  /*
-		 * Deal with in diff branch
-	   */
 	  window.deleteAtom = function () {
 	  	var oneNonHydrogenBond = function (atom) {
 	  		var atomBonds = getBonds(atom.id);

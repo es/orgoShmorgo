@@ -8,9 +8,13 @@
 	opacity: 0.3;
 }
 
-.link line.separator {
+.link line.double {
   stroke: #fff;
   stroke-width: 2px;
+}
+
+.link line.triple {
+  stroke-width: 3px;
 }
 
 .node circle {
