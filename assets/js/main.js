@@ -6,6 +6,8 @@
 
 	var color = d3.scale.category20();
 
+	var moleculeExamples = {};
+
 	var radius = d3.scale.sqrt()
 	    .range([0, 6]);
 
@@ -31,7 +33,7 @@
 				  hideAfter: 3,
 				  showCloseButton: true
 				});
-
+	 	
 	 	if (bondSelected)
 	 		bondSelected.style("filter", "");
 
@@ -69,28 +71,47 @@
 				],
 				callback: function(data) {
 					if (data !== false) {
-						// Might be super dirty, but it works!
-						$('#moleculeDisplay').empty();
-						svg = d3.select("#moleculeDisplay").append("svg")
-								    .attr("width", width)
-								    .attr("height", height)
-								    .call(selectionGlove);
-						orgoShmorgo(JSON.parse(data.molecule));
-						Messenger().post({
-						  message: 'Good god Charlie, it works!',
-						  type: 'success',
-						  showCloseButton: true
-						});
+						
+						newMoleculeSimulation(data.molecule)
 					}
 				}
 			});
 	};
+
+	var newMoleculeSimulation = function (newMolecule, example) {
+		// Might be super dirty, but it works!
+		$('#moleculeDisplay').empty();
+		svg = d3.select("#moleculeDisplay").append("svg")
+				    .attr("width", width)
+				    .attr("height", height)
+				    .call(selectionGlove);
+		if (example)
+			newMolecule = newMolecule[example];
+		newMolecule = $.extend(true, {}, newMolecule);
+		orgoShmorgo(newMolecule);
+		
+		Messenger().post({
+		  message: 'Good god Charlie, it works!',
+		  type: 'success',
+		  showCloseButton: true,
+		  hideAfter: 2
+		});
+	};
+
+	window.loadMoleculeExample = function () {
+		newMoleculeSimulation (moleculeExamples, $('#moleculeExample').val().trim());
+	};
+
+	$.getJSON("molecules.json", function(json) {
+    moleculeExamples = json;
+    newMoleculeSimulation (moleculeExamples, 'default');
+	});
 	
 	var orgoShmorgo = function(graph) {
-	  var nodesList = graph.nodes;
-	  var linksList = graph.links;
-	  console.log('nodesList:', nodesList);
-	  console.log('linksList:', linksList);
+	  var nodesList, linksList;
+	  nodesList = graph.nodes;
+	  linksList = graph.links;
+	  		
 
 	  var force = d3.layout.force()
 	    						.nodes(nodesList)
@@ -492,5 +513,4 @@
 	    node.attr("transform", function(d) {return "translate(" + d.x + "," + d.y + ")"; });
 	  }
 	};
-	d3.json("graph.json", orgoShmorgo);
 })();

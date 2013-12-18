@@ -25,15 +25,31 @@
 		<div class="container">
 			<div id="controlPanel" class="row">
 				<div class="row">
-					<div class="col-md-7">
-						 <div class="input-group">
-					      <input type="text" disabled style="background-color: #fff; cursor: auto;" placeholder="Carbon Name" class="form-control">
-					      <span class="input-group-btn">
-					        <button class="btn btn-default" type="button">Name The Molecule</button>
-					      </span>
+					<div class="col-md-8">
+						<div class="input-group">
+					   <!-- <input type="text" disabled style="background-color: #fff; cursor: auto;" placeholder="Carbon Name" class="form-control"> 
+					      	<span class="input-group-btn">
+					    		<button style="padding-left:5px" class="btn btn-default" onclick="loadMoleculeExample()" type="button">Load Molecule</button>
+					    	</span> -->
+						    <select id="moleculeExample" class="form-control">
+							    <option selected value="2-amino-propanoic_acid">2-amino-propanoic acid</option>
+							    <option value="N,N-diethylhexanamide">N,N-diethylhexanamide</option>
+							    <option value="N-ethyl-N-propyl-3-methylbutanamide">N-ethyl-N-propyl-3-methylbutanamide</option>
+							    <option value="ethyl 1-ethylpent-3-enoate">ethyl 1-ethylpent-3-enoate</option>
+							    <option value="2-bromo-3-ethoxy-4-methylhexane">2-bromo-3-ethoxy-4-methylhexane</option>
+							    <option value="1-iodo-2-chloroethyne">1-iodo-2-chloroethyne</option>
+							    <option value="2-bromo-2,3-difluoropent-4-ynoic_acid">2-bromo-2,3-difluoropent-4-ynoic acid</option>
+							    <option value="4,4-dibromo-3,3-dimethylpent-2-one">4,4-dibromo-3,3-dimethylpent-2-one</option>
+							    <option value="5-methyloct-3-yn-2,6-dione">5-methyloct-3-yn-2,6-dione</option>
+							    <option value="3-methyl-3-iodobutanal">3-methyl-3-iodobutanal</option>
+							    <option value="3-iodo-3-methylhexan-1,4-diamine">3-iodo-3-methylhexan-1,4-diamine</option>
+							</select>
+							<span class="input-group-btn">
+					    		<button style="margin-left: 5px; margin-right:210px" class="btn btn-default" onclick="loadMoleculeExample()" type="button">Load Molecule</button>
+					    	</span>
 					    </div><!-- /input-group -->
 					</div>
-					<div class="col-md-5">
+					<div class="col-md-4">
 						<div class="text-right">
 							<button type="button" onclick="saveMolecule()" class="btn btn-info">Save Molecule </button>
 							<button type="button" onclick="loadMolecule()" class="btn btn-info">Load Molecule </button>
