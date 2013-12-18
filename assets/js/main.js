@@ -56,9 +56,41 @@
 	  return Math.floor(Math.random() * (max - min + 1) + min);
 	}
 
-	d3.json("graph.json", function(graph) {
+	window.loadMolecule = function () {
+	  	vex.dialog.open({
+				message: 'Copy your saved molecule data:',
+				input: "Molecule: <br/>\n<textarea id=\"molecule\" name=\"molecule\" value=\"\" style=\"height:150px\" placeholder=\"Saved Molecule Data\" required></textarea>",
+				buttons: [
+					$.extend({}, vex.dialog.buttons.YES, {
+					text: 'Load'
+				}), $.extend({}, vex.dialog.buttons.NO, {
+					text: 'Cancel'
+				})
+				],
+				callback: function(data) {
+					if (data !== false) {
+						// Might be super dirty, but it works!
+						$('#moleculeDisplay').empty();
+						svg = d3.select("#moleculeDisplay").append("svg")
+								    .attr("width", width)
+								    .attr("height", height)
+								    .call(selectionGlove);
+						orgoShmorgo(JSON.parse(data.molecule));
+						Messenger().post({
+						  message: 'Good god Charlie, it works!',
+						  type: 'success',
+						  showCloseButton: true
+						});
+					}
+				}
+			});
+	};
+	
+	var orgoShmorgo = function(graph) {
 	  var nodesList = graph.nodes;
 	  var linksList = graph.links;
+	  console.log('nodesList:', nodesList);
+	  console.log('linksList:', linksList);
 
 	  var force = d3.layout.force()
 	    						.nodes(nodesList)
@@ -140,6 +172,43 @@
 
 		  force.start();
 	  }
+
+	  window.saveMolecule = function () {
+	  	var specialLinks = [], specialNodes = [], nodeIdArr = [];
+	  	for (var i = nodes.length - 1; i >=0; i--) {
+	  		specialNodes.push({
+	  				symbol: nodes[i].symbol,
+						size: nodes[i].size,
+						x: nodes[i].x,
+						y: nodes[i].y,
+						id: nodes[i].id,
+						bonds: nodes[i].bonds
+					});
+	  		nodeIdArr.push(nodes[i].id);
+	  	}
+	  	for (var i = links.length - 1; i >=0; i--) {
+	  		specialLinks.push({
+						source: nodeIdArr.indexOf(links[i].source.id),
+						target: nodeIdArr.indexOf(links[i].target.id),
+						id: links[i].id,
+						bond: links[i].bond
+					});
+	  	}
+	  	molecule = {
+			    nodes: specialNodes,
+			    links: specialLinks
+			};
+	  	vex.dialog.open({
+				message: 'To save your current molecule, copy the data below. Next time you visit click on the load molecule and input your saved data:',
+				input: "Molecule: <br/>\n<textarea id=\"atoms\" name=\"atoms\" value=\"\" style=\"height:150px\" placeholder=\"Molecule Data\">" + JSON.stringify(molecule) + "</textarea>",
+				buttons: [
+					$.extend({}, vex.dialog.buttons.YES, {
+						text: 'Ok'
+					})
+				],
+				callback: function(data) {}
+			});
+	  };
 
 	  window.changeBond = function (bondType) {
 	  	if (!bondSelected) {
@@ -422,6 +491,6 @@
 
 	    node.attr("transform", function(d) {return "translate(" + d.x + "," + d.y + ")"; });
 	  }
-
-	});
+	};
+	d3.json("graph.json", orgoShmorgo);
 })();

@@ -11,6 +11,9 @@
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="assets/libs/bootstrap/css/bootstrap-3.0.3.min.css">
 		<link rel="stylesheet" type="text/css" href="assets/libs/bootswatch/flatly/bootstrap.min.css">
+		
+		<link rel="stylesheet" href="assets/libs/vex/vex.css" />
+		<link rel="stylesheet" href="assets/libs/vex/vex-theme-default.css" />
 		<link rel="stylesheet" type="text/css" href="assets/libs/messenger/css/messenger.css">
 		<link rel="stylesheet" type="text/css" href="assets/libs/messenger/css/messenger-theme-flat.css">
 		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
@@ -32,8 +35,8 @@
 					</div>
 					<div class="col-md-5">
 						<div class="text-right">
-							<button type="button" class="btn btn-info">Share Molecule </button>
-							<button type="button" class="btn btn-info">Load Molecule </button>
+							<button type="button" onclick="saveMolecule()" class="btn btn-info">Save Molecule </button>
+							<button type="button" onclick="loadMolecule()" class="btn btn-info">Load Molecule </button>
 						</div>
 					</div>
 				</div>
@@ -92,6 +95,8 @@
 			    theme: 'flat'
 			};
 		</script>
+		<script src="assets/libs/vex/vex.combined.min.js"></script>
+		<script>vex.defaultOptions.className = 'vex-theme-default';</script>
 		<script type="text/javascript" src="assets/libs/d3/d3.v3.min.js"></script>
 		<script type="text/javascript" src="assets/libs/glow.js"></script>
 		<script type="text/javascript" src="assets/js/atomDB.js"></script>
