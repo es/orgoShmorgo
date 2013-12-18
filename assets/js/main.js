@@ -235,7 +235,7 @@
 	  	}
 			else if (!bondChangePossible(bondData, bondType)) {
 				Messenger().post({
-				  message: 'That type of bond there will make Ms. Extavour mad and we don\'t want that. Quick pretend like you\'re doing chemistry!',
+				  message: 'That type of bond will make Ms. Extavour mad and we don\'t want that. Quick, pretend like you\'re doing chemistry!',
 				  type: 'error',
 				  showCloseButton: true
 				});
