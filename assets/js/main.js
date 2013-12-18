@@ -72,7 +72,7 @@
 				callback: function(data) {
 					if (data !== false) {
 						
-						newMoleculeSimulation(data.molecule)
+						newMoleculeSimulation(JSON.parse(data.molecule));
 					}
 				}
 			});
