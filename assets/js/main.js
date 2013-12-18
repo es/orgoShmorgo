@@ -21,8 +21,8 @@
 	 		atomSelected.style("filter", "");
 
 	 	atomSelected = d3.select(this)
-	 					 			.select("circle")
-	 						    .style("filter", "url(#selectionGlove)");
+	 					 				 .select("circle")
+	 						    	 .style("filter", "url(#selectionGlove)");
 	};
 
 	var bondSelected;
@@ -91,7 +91,7 @@
 		orgoShmorgo(newMolecule);
 		
 		Messenger().post({
-		  message: 'Good god Charlie, it works!',
+		  message: 'New Molecule Loaded',
 		  type: 'success',
 		  showCloseButton: true,
 		  hideAfter: 2
@@ -118,6 +118,7 @@
 	    						.links(linksList)
 	    						.size([width, height])
 	    						.charge(-400)
+	    						.linkStrength(function (d) { return d.bond * 1;})
 	    						.linkDistance(function(d) { return radius(d.source.size) + radius(d.target.size) + 20; })
 	    						.on("tick", tick);
 
@@ -256,7 +257,7 @@
 	  	}
 			else if (!bondChangePossible(bondData, bondType)) {
 				Messenger().post({
-				  message: 'That type of bond will make Ms. Extavour mad and we don\'t want that. Quick, pretend like you\'re doing chemistry!',
+				  message: 'That type of bond cannot exist there!',
 				  type: 'error',
 				  showCloseButton: true
 				});
