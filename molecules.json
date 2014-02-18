@@ -16,18 +16,18 @@
             {"symbol": "H", "size": 1, "bonds": 1, "id":13}
           ],
           "links": [
-            {"source": 0, "target": 1,  "bond": 1, "id": 21},
-            {"source": 1, "target": 2,  "bond": 1, "id": 22},
-            {"source": 1, "target": 3,  "bond": 1, "id": 23},
-            {"source": 2, "target": 5,  "bond": 2, "id": 24},
-            {"source": 2, "target": 6,  "bond": 1, "id": 25},
-            {"source": 1, "target": 4,  "bond": 1, "id": 26},
-            {"source": 3, "target": 10, "bond": 1, "id": 27},
-            {"source": 3, "target": 11, "bond": 1, "id": 28},
-            {"source": 0, "target": 7,  "bond": 1, "id": 29},
-            {"source": 0, "target": 8,  "bond": 1, "id": 210},
-            {"source": 0, "target": 9,  "bond": 1, "id": 211},
-            {"source": 6, "target": 12,  "bond": 1, "id": 212}
+            {"source": 0, "target": 1,  "bondType": 1, "id": 21},
+            {"source": 1, "target": 2,  "bondType": 1, "id": 22},
+            {"source": 1, "target": 3,  "bondType": 1, "id": 23},
+            {"source": 2, "target": 5,  "bondType": 2, "id": 24},
+            {"source": 2, "target": 6,  "bondType": 1, "id": 25},
+            {"source": 1, "target": 4,  "bondType": 1, "id": 26},
+            {"source": 3, "target": 10, "bondType": 1, "id": 27},
+            {"source": 3, "target": 11, "bondType": 1, "id": 28},
+            {"source": 0, "target": 7,  "bondType": 1, "id": 29},
+            {"source": 0, "target": 8,  "bondType": 1, "id": 210},
+            {"source": 0, "target": 9,  "bondType": 1, "id": 211},
+            {"source": 6, "target": 12,  "bondType": 1, "id": 212}
           ]
     },
     "N,N-diethylhexanamide": {
@@ -236,193 +236,193 @@
                 "source": 0,
                 "target": 18,
                 "id": "11eebbc2-fd01-4dd2-b814-a10df9ad4c8c",
-                "bond": 2
+                "bondType": 2
             },
             {
                 "source": 4,
                 "target": 14,
                 "id": "89c413bb-1bd4-4746-a196-491fe30cf763",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 4,
                 "target": 1,
                 "id": "8f9ee914-5d32-438a-aaac-23f28a0056b6",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 4,
                 "target": 2,
                 "id": "c3fda6c0-a94b-4ca2-8d55-1b58500fc02e",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 4,
                 "target": 3,
                 "id": "5947f4e8-3d56-429b-98cd-101fdf1237f9",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 11,
                 "id": "8060c85d-00e8-4023-9694-9986ef9e7200",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 5,
                 "id": "acf7c9c2-98b5-4e54-8b83-7828d924e549",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 6,
                 "id": "aa37da02-c529-4208-a3c5-82c941808a6a",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 7,
                 "id": "7f8ef999-f139-4a29-a686-57057b737e55",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 11,
                 "target": 15,
                 "id": "2a0f4e27-de81-4e4b-b5de-dd1f1ff665ee",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 11,
                 "target": 9,
                 "id": "3744df45-d8b4-4cbd-9186-ec62e906e54b",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 11,
                 "target": 10,
                 "id": "670992a6-d01e-4b07-aeaa-2597339f4351",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 14,
                 "target": 15,
                 "id": "d7fb519b-c787-473a-a7bc-a139e4163c85",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 14,
                 "target": 12,
                 "id": "bbf7eca7-6d52-418d-886f-d5a54e2fa907",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 14,
                 "target": 13,
                 "id": "a39f2271-667f-4c5b-8964-d5282735d652",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 15,
                 "target": 18,
                 "id": "87c40bb1-a1cd-47fb-8f86-f7b2d5b142ff",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 32,
                 "target": 16,
                 "id": "288f0cce-2996-47b6-8c20-193ab6b5bff2",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 32,
                 "target": 17,
                 "id": "e78bd65b-a8a0-48fa-80a9-eb8119b58ab5",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 18,
                 "target": 21,
                 "id": "851f6a28-7ed6-4fea-98cb-abe52cd76e40",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 21,
                 "target": 24,
                 "id": "4a350c34-71e0-458c-8b64-8d0e8c18ec89",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 21,
                 "target": 19,
                 "id": "244960af-08c8-4550-a903-13a6052d1dc6",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 21,
                 "target": 20,
                 "id": "58f41768-4e0d-4c17-b984-acc4a3cbdbf1",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 24,
                 "target": 32,
                 "id": "644c8f39-acf8-403d-9824-06ff55241438",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 24,
                 "target": 22,
                 "id": "7f27f19e-e7f1-4c7a-b001-6f3a43055578",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 24,
                 "target": 23,
                 "id": "e248fdcd-34a2-461b-8e96-a780611b55ca",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 31,
                 "target": 25,
                 "id": "3e37e654-d891-4df4-a967-4c417757a8b2",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 30,
                 "target": 26,
                 "id": "68f17de7-01ea-4b9e-b105-7b7ab85bcb69",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 30,
                 "target": 27,
                 "id": "d829769e-f7ee-4099-bf9a-36663f3e5ee1",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 30,
                 "target": 28,
                 "id": "2b60e8cc-5015-4578-ada1-3b8b34fadcba",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 31,
                 "target": 29,
                 "id": 26,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 31,
                 "target": 30,
                 "id": 22,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 32,
                 "target": 31,
                 "id": 21,
-                "bond": 1
+                "bondType": 1
             }
         ]
     },
@@ -632,193 +632,193 @@
                 "source": 3,
                 "target": 31,
                 "id": "8c58906b-ec5b-4ae7-b7f4-0ee6574a1431",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 3,
                 "target": 0,
                 "id": "aecc8f21-4e30-40ac-8c66-78cb89228241",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 3,
                 "target": 1,
                 "id": "9523162e-9964-4995-b856-a2aa471c33dd",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 3,
                 "target": 2,
                 "id": "92bc35fd-4af5-45c5-8669-8b318a3f265f",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 32,
                 "target": 4,
                 "id": "19fce81c-ef42-4747-b9d8-407dd9b6dd83",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 18,
                 "id": "e0c7c05d-81df-4a2f-861e-3e799ad61e25",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 5,
                 "id": "a8cab26f-909e-4b65-8c5c-6c274c80ee89",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 6,
                 "id": "fc34f938-bc62-415c-8807-7cc4f00b55a3",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 7,
                 "id": "5dab968e-a195-4c95-93a0-bb99e93d8b31",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 12,
                 "target": 15,
                 "id": "7bf4e8da-0829-4609-bff8-c32833f2312d",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 12,
                 "target": 9,
                 "id": "e83fb19a-7db0-4f44-8630-1bbec2dd464c",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 12,
                 "target": 10,
                 "id": "0bd5455b-2b7f-47a3-ba19-d0b639e98eb5",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 12,
                 "target": 11,
                 "id": "9292b97c-a09f-4900-be5a-ae9e5e554700",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 15,
                 "target": 21,
                 "id": "03928a48-db2c-4ff3-9da7-5eca38df9cd5",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 15,
                 "target": 13,
                 "id": "9ec76c7a-576c-490b-9c99-167364f554f0",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 15,
                 "target": 14,
                 "id": "b7162152-fa33-4475-8015-fe619e3a3799",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 18,
                 "target": 22,
                 "id": "4db074e3-9951-4da6-96bd-2a82d84a6924",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 18,
                 "target": 16,
                 "id": "c336dc07-69bf-4b88-a435-3d4fd4a1c944",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 18,
                 "target": 17,
                 "id": "9e1a30fa-69a3-4a6d-b15f-be37505f4890",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 21,
                 "target": 22,
                 "id": "9eac9db1-64f7-46cc-8fb2-445f75b69f54",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 21,
                 "target": 19,
                 "id": "ad849b81-bbbd-449a-865c-5d32f324a7f2",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 21,
                 "target": 20,
                 "id": "a6a25d98-f37d-49d4-ad2d-caddc90e9da1",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 22,
                 "target": 30,
                 "id": "87eb88b4-c688-4456-ad2e-1bfb7526ceba",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 31,
                 "target": 23,
                 "id": "074194e6-48c6-4515-bc26-7f3047419d92",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 27,
                 "target": 32,
                 "id": "4b1d4462-1787-478b-a9f3-cab2f5eebd23",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 27,
                 "target": 24,
                 "id": "606f825e-90c5-41f3-bcce-74ed33dd8377",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 27,
                 "target": 25,
                 "id": "589c899c-f486-4ff2-ac8e-838821110bc9",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 27,
                 "target": 26,
                 "id": "aad64617-ceda-4432-ac31-bcc0d449b640",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 32,
                 "target": 28,
                 "id": 211,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 30,
                 "target": 29,
                 "id": 24,
-                "bond": 2
+                "bondType": 2
             },
             {
                 "source": 31,
                 "target": 30,
                 "id": 22,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 32,
                 "target": 31,
                 "id": 21,
-                "bond": 1
+                "bondType": 1
             }
         ]
     },
@@ -998,169 +998,169 @@
                 "source": 27,
                 "target": 26,
                 "id": "88850e56-015b-4e09-91f7-15d442464409",
-                "bond": 2
+                "bondType": 2
             },
             {
                 "source": 3,
                 "target": 0,
                 "id": "8e1f57e0-c439-4473-b634-726893f8161d",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 3,
                 "target": 6,
                 "id": "4008db4c-42da-438b-bcd2-b2db0260dbf1",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 3,
                 "target": 1,
                 "id": "1f1d3799-7a08-499d-b249-ebff2015ec83",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 3,
                 "target": 2,
                 "id": "8848a2cc-5754-4193-83b0-38760209ded4",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 6,
                 "target": 8,
                 "id": "f0b2cd24-4b65-4eb4-83de-58380a5ce9b2",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 6,
                 "target": 4,
                 "id": "473fe602-204b-46b0-99e9-006679b93563",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 6,
                 "target": 5,
                 "id": "810b4c46-fd7d-4e45-b501-06aaf45515b3",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 16,
                 "id": "441b5733-2bc0-414c-96db-0fa70c71f641",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 16,
                 "target": 7,
                 "id": "6a233290-55e6-4f2a-8033-58d3698ef888",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 16,
                 "id": "fc66eaef-63ce-4362-80d4-b5b5d839a32a",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 12,
                 "target": 15,
                 "id": "5f2d2946-09f2-4f2d-bde0-1cf965ab01fe",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 12,
                 "target": 9,
                 "id": "293777ce-8558-4c1d-a7ca-d1cb8aaadfe0",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 12,
                 "target": 10,
                 "id": "386f2c77-5a12-4ce3-ae86-27f22cbf61cf",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 12,
                 "target": 11,
                 "id": "35f82374-729f-4141-a7ff-04df265b4626",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 15,
                 "target": 16,
                 "id": "6e0e319d-125b-4398-a780-81cb6322a66b",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 15,
                 "target": 13,
                 "id": "a25759c9-74f4-449f-bce0-8519d469fd0d",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 15,
                 "target": 14,
                 "id": "4a0dad32-6fe5-4e09-92e2-424a98205768",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 16,
                 "target": 25,
                 "id": "fb39f5e1-4773-49f6-97ee-33a6e834c893",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 20,
                 "target": 27,
                 "id": "de8f3d89-9722-44ff-8bc0-d6198c4d6c45",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 20,
                 "target": 17,
                 "id": "d1eebfd0-8b46-46ba-8367-dc130e05d797",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 20,
                 "target": 18,
                 "id": "69f3b776-d496-4fb2-8c3e-8fc32bfa2bc2",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 20,
                 "target": 19,
                 "id": "1b65442f-3470-4e51-9240-62777ec9e503",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 26,
                 "target": 21,
                 "id": "47462a95-8e04-4e6c-9a53-d09b77cd535b",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 25,
                 "target": 22,
                 "id": "3da395e5-aa3d-4547-b116-4ba0720a6ac3",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 25,
                 "target": 23,
                 "id": "c98de195-10f3-4557-a595-ef8e3aa41850",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 27,
                 "target": 24,
                 "id": 211,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 26,
                 "target": 25,
                 "id": 22,
-                "bond": 1
+                "bondType": 1
             }
         ]
     },
@@ -1352,175 +1352,175 @@
                 "source": 3,
                 "target": 27,
                 "id": "aa80d1a6-05fc-4fe6-855a-d9a390e910dc",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 3,
                 "target": 0,
                 "id": "37a3378b-cd6e-4073-adef-f735f5b3fb1e",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 3,
                 "target": 1,
                 "id": "118d4a82-ba0c-4047-95ca-9b8ebb083f0e",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 3,
                 "target": 2,
                 "id": "20767c04-3a54-42d4-848f-b876daac10e3",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 4,
                 "target": 18,
                 "id": "16f46de9-8967-4a79-9e49-55be315d7843",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 11,
                 "id": "a18db49a-a492-4ff8-b003-407cd40f184b",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 5,
                 "id": "66947cc6-7bc0-4878-9b97-40e2c9fcc10d",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 6,
                 "id": "92c50d6c-3dbd-4e7d-846e-e0f7438255a6",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 7,
                 "id": "6722f2a6-1caa-4541-acc0-f6ad55bc724e",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 11,
                 "target": 12,
                 "id": "eba934d7-b876-44d3-b695-20a80b59a6be",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 11,
                 "target": 9,
                 "id": "8d5e6a8c-9e23-49c9-920b-9213c34e7611",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 11,
                 "target": 10,
                 "id": "d03ea7a5-a709-4fa3-89eb-2efe5f626134",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 12,
                 "target": 20,
                 "id": "c35374e0-5b5e-4d7e-8ee0-7ebfdc502214",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 16,
                 "target": 18,
                 "id": "4cf8c543-c7ff-480f-8e76-75a42af4ac23",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 16,
                 "target": 13,
                 "id": "7687e536-9084-40cd-bb5f-6a45282a539a",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 16,
                 "target": 14,
                 "id": "0279375f-1588-472d-b7bc-adbf485957dc",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 16,
                 "target": 15,
                 "id": "7c696914-4837-4ed3-bed4-610882a7ffc8",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 18,
                 "target": 20,
                 "id": "a0f12e1a-e508-47df-8669-dd918999cc03",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 18,
                 "target": 17,
                 "id": "f0113150-265f-4c14-b3b3-0e9ad085d38d",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 20,
                 "target": 27,
                 "id": "44f35e1c-4835-426d-9d30-6625b850ea4f",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 20,
                 "target": 19,
                 "id": "6d446909-d666-4634-8cb5-f5b0a5397685",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 28,
                 "target": 21,
                 "id": "ab59ea24-d2b1-4896-b82d-d201a382771e",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 27,
                 "target": 22,
                 "id": "431891b6-856c-4cb3-bcd7-721d033603ef",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 29,
                 "target": 23,
                 "id": 211,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 29,
                 "target": 24,
                 "id": 210,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 29,
                 "target": 25,
                 "id": 29,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 28,
                 "target": 26,
                 "id": 26,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 28,
                 "target": 27,
                 "id": 22,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 29,
                 "target": 28,
                 "id": 21,
-                "bond": 1
+                "bondType": 1
             }
         ]
     },
@@ -1556,19 +1556,19 @@
                 "source": 0,
                 "target": 3,
                 "id": "d0015d33-770b-4bda-9a93-cccab3c54ad9",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 1,
                 "target": 2,
                 "id": "712959f8-4fe6-4f18-9d95-64d7e3d801ec",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 3,
                 "target": 2,
                 "id": "8b5e7687-1c92-4454-ac11-5c837dc1fecf",
-                "bond": 3
+                "bondType": 3
             }
         ]
     },
@@ -1676,91 +1676,91 @@
                 "source": 0,
                 "target": 13,
                 "id": "54286395-d31a-463d-9936-8a36f10bcb9b",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 1,
                 "target": 11,
                 "id": "72ee0466-ae3f-4078-b819-a560118edb59",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 2,
                 "target": 11,
                 "id": "de6ed1e0-b0dd-4c8a-8d47-d6559139b2b1",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 3,
                 "target": 10,
                 "id": "3b3461a1-af69-4851-a8e5-771a959fb888",
-                "bond": 2
+                "bondType": 2
             },
             {
                 "source": 5,
                 "target": 10,
                 "id": "4a173eee-82ed-4d70-9553-f5d7b9e01ce3",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 5,
                 "target": 4,
                 "id": "df4ebc26-c931-4e5e-b20f-c1ed9c1d9894",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 9,
                 "target": 14,
                 "id": "3cae23b9-0f45-44b5-b648-f4df52b29ea6",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 9,
                 "target": 6,
                 "id": "e26f8c4b-16c8-46e3-9abf-357d44b40efa",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 9,
                 "target": 7,
                 "id": "4fcb87c5-d2bb-4c52-8888-7a9416f2067b",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 9,
                 "target": 8,
                 "id": "29135c49-211c-43d5-b8e2-219cd1d10af6",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 10,
                 "target": 11,
                 "id": "12fe720d-91dd-4d4a-a5c9-fe961ae19d7d",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 11,
                 "target": 13,
                 "id": "b65530db-d649-4c54-8e21-c6ca37c09619",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 13,
                 "target": 15,
                 "id": "c6d104cf-dc89-4ecb-9e97-1b447541e99e",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 13,
                 "target": 12,
                 "id": "12586051-5a79-4aa1-bb16-8546993190f7",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 15,
                 "target": 14,
                 "id": "8b5e7687-1c92-4454-ac11-5c837dc1fecf",
-                "bond": 3
+                "bondType": 3
             }
         ]
     },
@@ -1904,127 +1904,127 @@
                 "source": 0,
                 "target": 20,
                 "id": "fe101442-7de2-486d-839a-2a9f534df678",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 1,
                 "target": 20,
                 "id": "5e17f17f-bf66-4b33-b47a-878a2bc656cf",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 5,
                 "target": 21,
                 "id": "2b553ee7-c226-4d81-a534-3ff3308d1e4b",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 5,
                 "target": 2,
                 "id": "cb67287b-a551-4b99-a2b0-abcdead46952",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 5,
                 "target": 3,
                 "id": "6b33de03-206d-4b95-baa7-53edb4d44bf9",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 5,
                 "target": 4,
                 "id": "c97e75e5-0b33-4543-a961-d08aab4af8e9",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 9,
                 "target": 21,
                 "id": "c25e4a31-d05b-4af0-838a-0dc408f18d0c",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 9,
                 "target": 6,
                 "id": "1975e88e-1b96-423d-9e1b-9bd427c9deae",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 9,
                 "target": 7,
                 "id": "82bc46ee-701d-464e-9538-29001dbb1cd4",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 9,
                 "target": 8,
                 "id": "b8a3446b-c0f6-4386-a125-aac37d6685a7",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 10,
                 "target": 15,
                 "id": "42764f99-47e3-4d12-99fd-acf6837ede49",
-                "bond": 2
+                "bondType": 2
             },
             {
                 "source": 14,
                 "target": 15,
                 "id": "cdb88cc3-e65c-4336-97de-4695658d79f7",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 14,
                 "target": 11,
                 "id": "f46ff527-1293-4b5b-92e6-96043a2232a3",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 14,
                 "target": 12,
                 "id": "e724317d-550a-4723-aeea-c5329ce56b81",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 14,
                 "target": 13,
                 "id": "e730e412-1796-4a37-b2f7-9ac13fa21079",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 15,
                 "target": 21,
                 "id": "86d23b1e-b5ac-4cd7-9be0-a306603127b6",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 19,
                 "target": 16,
                 "id": "b1bc022e-00b7-4813-b49c-8b5014acd607",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 19,
                 "target": 17,
                 "id": "de2585eb-f434-4d17-a83a-4c8df147e255",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 19,
                 "target": 18,
                 "id": "edc1a9a8-c1b2-40ea-adea-fc52a4b3832e",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 20,
                 "target": 19,
                 "id": 22,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 21,
                 "target": 20,
                 "id": 21,
-                "bond": 1
+                "bondType": 1
             }
         ]
     },
@@ -2174,139 +2174,139 @@
                 "source": 0,
                 "target": 10,
                 "id": "dbd4f100-01c3-47c7-b8a0-a069f899585a",
-                "bond": 2
+                "bondType": 2
             },
             {
                 "source": 1,
                 "target": 21,
                 "id": "0e5176d1-6124-44b6-ae7c-310b4f3fc518",
-                "bond": 2
+                "bondType": 2
             },
             {
                 "source": 11,
                 "target": 16,
                 "id": "cb661af2-c2af-4281-a093-f869db4713eb",
-                "bond": 3
+                "bondType": 3
             },
             {
                 "source": 5,
                 "target": 20,
                 "id": "3d83b9c6-ad8f-4150-93c7-7cba51c414a0",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 5,
                 "target": 2,
                 "id": "077a2465-1f94-4979-8f6b-4d3b71c037d3",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 5,
                 "target": 3,
                 "id": "30b51d0f-d6f5-411c-9593-c47f3495b444",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 5,
                 "target": 4,
                 "id": "93e02fdc-876e-40d4-ad83-70e6fca9f251",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 9,
                 "id": "acf7c9c2-zzzz-zzzz-zzzz-7828d924e549",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 9,
                 "target": 10,
                 "id": "a492580a-872d-4d22-a317-fd6788954869",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 9,
                 "target": 6,
                 "id": "7713885a-69c7-4ec9-b02e-b3d29c6faf84",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 9,
                 "target": 7,
                 "id": "f821d8b0-4632-42c9-aeb4-8c543b418deb",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 10,
                 "target": 11,
                 "id": "60a9590b-4ba5-44be-bfe8-1f12385185fb",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 11,
                 "target": 16,
                 "id": "f5ca283f-7dc0-4aec-a67c-86153e360846",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 15,
                 "target": 22,
                 "id": "99db69d7-518c-4ef7-aa46-5dc964bd03df",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 15,
                 "target": 12,
                 "id": "0769a025-52df-4ddd-85ed-16ac42220c60",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 15,
                 "target": 13,
                 "id": "6b9dacae-a932-42b3-9b92-4097ae5fdb3a",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 15,
                 "target": 14,
                 "id": "73dfe4b3-51d4-47f1-b83e-317a071fe82b",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 16,
                 "target": 20,
                 "id": "14822512-7881-43e5-b35c-09ecd4a6dc66",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 20,
                 "target": 17,
                 "id": "690e7a23-2405-46f8-aaa2-910b4773eaf4",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 22,
                 "target": 18,
                 "id": 211,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 22,
                 "target": 19,
                 "id": 210,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 21,
                 "target": 20,
                 "id": 22,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 22,
                 "target": 21,
                 "id": 21,
-                "bond": 1
+                "bondType": 1
             }
         ]
     },
@@ -2414,91 +2414,91 @@
                 "source": 0,
                 "target": 15,
                 "id": "7fdaa31b-010b-4673-9959-7d6fa6201da5",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 4,
                 "target": 15,
                 "id": "497eb54e-9162-4180-bfd4-ca602256d166",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 4,
                 "target": 1,
                 "id": "6b9a64fa-36fe-4cf8-9b89-1d2fd1f7a084",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 4,
                 "target": 2,
                 "id": "1d67826f-fc86-482b-b49f-e6513b9c81d3",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 4,
                 "target": 3,
                 "id": "b8234139-e368-46f8-9bdd-4aa8b696cf1a",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 15,
                 "id": "3713c73f-c9ac-4159-82bb-38beb402be40",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 5,
                 "id": "470461f1-5acc-4e3e-808c-622991faf8b0",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 6,
                 "id": "8f8848f9-4d89-447b-9ff1-c1a76922a3af",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 8,
                 "target": 7,
                 "id": "b060103e-624e-48db-82f3-670d37ade5d6",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 14,
                 "target": 9,
                 "id": "907984f1-a3fd-44d7-ad1e-597313f81069",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 13,
                 "target": 10,
                 "id": "5425eda6-2136-4272-8e83-70e4b9e69032",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 14,
                 "target": 12,
                 "id": 26,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 13,
                 "target": 11,
                 "id": 24,
-                "bond": 2
+                "bondType": 2
             },
             {
                 "source": 14,
                 "target": 13,
                 "id": 22,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 15,
                 "target": 14,
                 "id": 21,
-                "bond": 1
+                "bondType": 1
             }
         ]
     },
@@ -2672,157 +2672,157 @@
                 "source": 2,
                 "target": 17,
                 "id": "1567c53b-bfda-4d43-83dc-984ba6e2fdf6",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 2,
                 "target": 0,
                 "id": "b2f92ef9-04bf-459f-885d-d7bded5c427f",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 2,
                 "target": 1,
                 "id": "52678c9d-940d-40c2-82ce-0c8222a9dc46",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 5,
                 "target": 24,
                 "id": "aaaec74a-f54a-4318-81c5-858e590b3d83",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 5,
                 "target": 3,
                 "id": "38477ce0-8fc9-432a-8244-8d35cdb24df9",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 5,
                 "target": 4,
                 "id": "e661cc3a-c89f-46bf-9c36-83b4618d193e",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 24,
                 "target": 6,
                 "id": "c02b9262-923c-4ef2-b17e-aaa59a9327ae",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 24,
                 "target": 7,
                 "id": "b6735688-82f7-4ab5-a210-c7b13427a5e2",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 11,
                 "target": 14,
                 "id": "c1ceb693-3106-4d07-8164-309db8c5c230",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 11,
                 "target": 8,
                 "id": "ed79fd9d-46ff-4183-8a20-e08f4d91f4c1",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 11,
                 "target": 9,
                 "id": "172bed61-5fcc-4f15-a075-fd1d1556c228",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 11,
                 "target": 10,
                 "id": "30deb8a1-d700-4c74-9955-640db0410534",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 14,
                 "target": 17,
                 "id": "fdae62ac-6277-47c0-a650-14d17a84aeab",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 14,
                 "target": 12,
                 "id": "40c3cacd-e44e-40ee-8222-e6995c7dd94b",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 14,
                 "target": 13,
                 "id": "109bd1f4-3bc1-4537-b2b6-2679047a463f",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 15,
                 "target": 26,
                 "id": "7fdaa31b-010b-4673-9959-7d6fa6201da5",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 17,
                 "target": 26,
                 "id": "497eb54e-9162-4180-bfd4-ca602256d166",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 17,
                 "target": 16,
                 "id": "6b9a64fa-36fe-4cf8-9b89-1d2fd1f7a084",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 21,
                 "target": 26,
                 "id": "3713c73f-c9ac-4159-82bb-38beb402be40",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 21,
                 "target": 18,
                 "id": "470461f1-5acc-4e3e-808c-622991faf8b0",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 21,
                 "target": 19,
                 "id": "8f8848f9-4d89-447b-9ff1-c1a76922a3af",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 21,
                 "target": 20,
                 "id": "b060103e-624e-48db-82f3-670d37ade5d6",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 25,
                 "target": 22,
                 "id": "907984f1-a3fd-44d7-ad1e-597313f81069",
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 25,
                 "target": 23,
                 "id": 26,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 25,
                 "target": 24,
                 "id": 22,
-                "bond": 1
+                "bondType": 1
             },
             {
                 "source": 26,
                 "target": 25,
                 "id": 21,
-                "bond": 1
+                "bondType": 1
             }
         ]
     }

@@ -118,7 +118,7 @@
 	    						.links(linksList)
 	    						.size([width, height])
 	    						.charge(-400)
-	    						.linkStrength(function (d) { return d.bond * 1;})
+	    						.linkStrength(function (d) { return d.bondType * 1;})
 	    						.linkDistance(function(d) { return radius(d.source.size) + radius(d.target.size) + 20; })
 	    						.on("tick", tick);
 
@@ -140,16 +140,16 @@
 		      	// Add bond line
 		      	d3.select(this)
 		      		.append("line")
-							.style("stroke-width", function(d) { return (d.bond * 3 - 2) * 2 + "px"; });
+							.style("stroke-width", function(d) { return (d.bondType * 3 - 2) * 2 + "px"; });
 
 						// If double add second line
 						d3.select(this)
-							.filter(function(d) { return d.bond >= 2; }).append("line")
-							.style("stroke-width", function(d) { return (d.bond * 2 - 2) * 2 + "px"; })
+							.filter(function(d) { return d.bondType >= 2; }).append("line")
+							.style("stroke-width", function(d) { return (d.bondType * 2 - 2) * 2 + "px"; })
 							.attr("class", "double");
 
 						d3.select(this)
-							.filter(function(d) { return d.bond === 3; }).append("line")
+							.filter(function(d) { return d.bondType === 3; }).append("line")
 							.attr("class", "triple");
 
 						// Give bond the power to be selected
@@ -213,7 +213,7 @@
 						source: nodeIdArr.indexOf(links[i].source.id),
 						target: nodeIdArr.indexOf(links[i].target.id),
 						id: links[i].id,
-						bond: links[i].bond
+						bondType: links[i].bondType
 					});
 	  	}
 	  	molecule = {
@@ -232,7 +232,7 @@
 			});
 	  };
 
-	  window.changeBond = function (bondType) {
+	  window.changeBond = function (newBondType) {
 	  	if (!bondSelected) {
 				Messenger().post({
 				  message: 'No Bond Selected',
@@ -242,12 +242,12 @@
 				return;
 			}
 	  	var bondData = getAtomData(bondSelected);
-	  	var changeInCharge = bondType - bondData.bond;
-	  	var bondChangePossible = function (bond, newBondType) {
+	  	var changeInCharge = newBondType - bondData.bondType;
+	  	var bondChangePossible = function (bond) {
 	  		return (bond.target.bonds + changeInCharge <= atomDB[bond.target.symbol].lonePairs && bond.source.bonds + changeInCharge <= atomDB[bond.source.symbol].lonePairs);
 	  	};
 
-	  	if (!bondType || bondType < 1 || bondType > 3) {
+	  	if (!newBondType || newBondType < 1 || newBondType > 3) {
 	  		Messenger().post({
 				  message: 'Internal error :(',
 				  type: 'error',
@@ -255,7 +255,7 @@
 				});
 				return;
 	  	}
-			else if (!bondChangePossible(bondData, bondType)) {
+			else if (!bondChangePossible(bondData, newBondType)) {
 				Messenger().post({
 				  message: 'That type of bond cannot exist there!',
 				  type: 'error',
@@ -266,7 +266,7 @@
 
 			for (var i = links.length - 1; i >= 0; i--) {
 				if (links[i].id === bondData.id) {
-					var changeInCharge = bondType - bondData.bond;
+					var changeInCharge = newBondType - bondData.bondType;
 					var source = retriveAtom(links[i].source.id),
 							target = retriveAtom(links[i].target.id);
 					if (changeInCharge === 2) {
@@ -298,7 +298,7 @@
 					var newBond = {
 		 				source: bondData.source,
 		 				target: bondData.target, 
-		 				bond: bondType, 
+		 				bondType: newBondType, 
 		 				id: generateRandomID()
 		 			};
 		 			links.push(newBond);
@@ -367,7 +367,7 @@
 	 			links.push({
 	 				source: atom,
 	 				target: tempHydrogen, 
-	 				bond: 1, 
+	 				bondType: 1, 
 	 				id: generateRandomID()
 	 			});	
 	 		}
@@ -404,8 +404,8 @@
 																									 	'target':
 																										'source';
 							
-						bondsArr[i][nonHydrogenAtom].bonds -= bondsArr[i].bond;
-		 				addHydrogens(bondsArr[i][nonHydrogenAtom], bondsArr[i].bond);
+						bondsArr[i][nonHydrogenAtom].bonds -= bondsArr[i].bondType;
+		 				addHydrogens(bondsArr[i][nonHydrogenAtom], bondsArr[i].bondType);
 	 			}
 	 			// Convert atom obj to id for later processing
 	 			bondsArr[i] = bondsArr[i].id;
@@ -454,7 +454,7 @@
 		  links.push({
 		  	source: newAtom, 
 		  	target: getAtomData(atomSelected), 
-		  	bond: 1, 
+		  	bondType: 1, 
 		  	id: generateRandomID()
 		  }); // Need to make sure is unique
 		  
