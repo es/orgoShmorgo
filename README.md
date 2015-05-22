@@ -15,6 +15,10 @@ The future goals of the project:
  - Addition of a lot more functional groups
  - Ability to create rings
  - Integration with Wikipedia to display data on created organic molecules 
+ 
+Credit
+---------
+Built on top of [mbostock's](https://github.com/mbostock) original [molecule example](http://bl.ocks.org/mbostock/3037015).
 
 
 License
